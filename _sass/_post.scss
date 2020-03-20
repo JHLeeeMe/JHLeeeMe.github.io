@@ -1,3 +1,6 @@
+.has-push-menu {
+  background: #141414;
+}
 .post {
   position: relative;
   top: rem(30px);
@@ -82,13 +85,14 @@
   }
 
   h1.post-title {
+    color: darken($lightGray, 20%);
     line-height: 1.2;
     margin: rem(5px) auto rem(10px);
     padding-top: 0;
   }
 
   p.post-subtitle {
-    color: darken($lightGray, 30%);
+    color: darken($lightGray, 40%);
     font-size: rem(17px);
     margin: rem(10px) auto;
     line-height: 1.6;
@@ -136,7 +140,7 @@
 
   p,
   li {
-    color: $texts;
+    color: lighten($texts, 60%);
 
     code {
       font-size: rem(15px);
@@ -337,6 +341,7 @@
 /* See also */
 
 .see-also {
+  color: darken($lightGray, 20%);
   padding: 0 rem(20px);
 
   @include media(">=sm") {
