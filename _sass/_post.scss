@@ -641,9 +641,9 @@
 
     a {
       font-size: rem(14px);
-      color: $primaryDark;
+      color: $themeColor;
       display: inline-block;
-      border: 1px solid $primaryDark;
+      border: 1px solid $themeColor;
       border-radius: rem(20px);
       padding: 0 rem(10px);
       margin-right: rem(2px);
@@ -655,8 +655,8 @@
       }
 
       &:hover {
-        color: $accentDark;
-        background-color: $primaryDark;
+        color: #ffffff;
+        background-color: $themeColor;
       }
     }
   }
