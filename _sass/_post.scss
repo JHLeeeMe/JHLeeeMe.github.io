@@ -71,6 +71,7 @@
   iframe {
     @include center(rem(800px));
     @include mainFont(400);
+    color: darken(#ffffff, 20%);
     font-size: rem(17px);
     line-height: rem(30px);
     letter-spacing: 0.025rem;
