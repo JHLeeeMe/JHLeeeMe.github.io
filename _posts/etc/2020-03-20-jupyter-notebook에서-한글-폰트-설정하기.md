@@ -2,8 +2,8 @@
 date: 2020-03-20 07:45:22
 layout: post
 title: "Jupyter notebook에서 한글 폰트 설정하기"
-subtitle: 한글 폰트 설정
-description: matplotlib를 위한 한글 폰트 설정법
+subtitle:
+description:
 image: https://user-images.githubusercontent.com/31606119/77144908-6b0a5a00-6aca-11ea-8f8e-32eadbfba2ac.png
 optimized_image: https://user-images.githubusercontent.com/31606119/77144908-6b0a5a00-6aca-11ea-8f8e-32eadbfba2ac.png
 category: etc
