@@ -61,7 +61,7 @@ body {
     margin: rem(5px) rem(20px) rem(5px) 0;
     width: rem(20px);
     height: rem(20px);
-    fill: $accentDark;
+    fill: $themeColor;
 
     @include media(">=sm") {
       margin: rem(5px) rem(20px) rem(5px) rem(25px);
@@ -82,7 +82,8 @@ body {
   .icon-search {
     width: rem(20px);
     height: rem(20px);
-    fill: $accentDark;
+    //fill: $accentDark;
+    fill: $themeColor;
     margin: rem(5px);
   }
 
@@ -115,7 +116,7 @@ body.main-page {
 body.light:not(.main-page) {
   .bar-header {
     box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: #cccccc;
 
     .icon-search,
     .icon-menu {

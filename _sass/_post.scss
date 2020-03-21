@@ -375,12 +375,14 @@
 
       a {
         font-weight: normal;
-        color: $primaryDark;
+        //color: $primaryDark;
+        color: darken($lightGray, 50%);
         text-decoration: none;
         transition: all 0.3s;
 
         &:hover {
-          color: rgba(0, 0, 0, 0.5);
+          //color: rgba(0, 0, 0, 0.5);
+          color: $themeColor;
           img {
             -webkit-filter: grayscale(100%);
             filter: grayscale(100%);
