@@ -6,7 +6,7 @@ subtitle:
 description:
 image: https://user-images.githubusercontent.com/31606119/77247915-de51ce80-6c78-11ea-897a-59896b5e17a7.png
 optimized_image: https://user-images.githubusercontent.com/31606119/77247915-de51ce80-6c78-11ea-897a-59896b5e17a7.png
-category: etc
+category: ETC
 tags:
   - etc
   - Kolourpaint
