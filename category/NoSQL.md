@@ -1,7 +1,7 @@
 ---
 layout: category
 title: NoSQL
-slug: nosql
+slug: Nosql
 description: A category for general nosql posts.
 ---
 

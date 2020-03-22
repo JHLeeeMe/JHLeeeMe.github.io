@@ -1,7 +1,7 @@
 ---
 layout: category
 title: Python
-slug: python
+slug: Python
 description: A category for general python posts.
 ---
 

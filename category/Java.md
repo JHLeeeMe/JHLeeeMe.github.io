@@ -1,7 +1,7 @@
 ---
 layout: category
 title: Java
-slug: java
+slug: Java
 description: A category for general java posts.
 ---
 
