@@ -59,8 +59,8 @@
   }
 
   &:hover {
-    z-index: 2;
-    transform: scale(1.1);
+      z-index: 2;
+      transform: scale(1.1);
 
     img {
       -webkit-filter: grayscale(100%);
@@ -102,7 +102,16 @@
 
     a {
       color: $accentDark;
+      display: inline-block;
     }
+
+    a>span {
+      &:hover {
+        color: $themeColor;
+      }
+    }
+
+    
   }
 
   .box-body {
