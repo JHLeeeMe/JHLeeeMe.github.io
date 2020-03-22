@@ -137,6 +137,30 @@
         margin-right: rem(30px);
       }
     }
+
+    span>a {
+      float: right;
+      //font-size: rem(30px);
+
+      .category {
+        padding: rem(3px) rem(10px);
+        background-color: $themeColor;
+        border-radius: rem(5px);
+        color: #fff;
+
+      	&:hover {
+      	  color: $themeColor;
+      	  background-color: transparent;
+	  border: 1px solid;
+      	}
+      }
+
+      @include media(">=sm") {
+        font-size: rem(20px);
+        padding: 0;
+      }
+
+    }
   }
 
   p,
@@ -623,7 +647,7 @@
   margin-right: rem(3px);
 }
 
-/* Tags */
+/* Tags & Category */
 
 .post-content {
   .tags {

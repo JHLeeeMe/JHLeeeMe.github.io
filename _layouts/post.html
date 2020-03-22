@@ -17,9 +17,25 @@
                     {% endif %}
                     <svg id="clock" class="icon-clock"><use xlink:href="#icon-clock"></use></svg>
                     <span>{{ minutesText }}</span>
+		    {% if page.category %}
+		      <span>
+		        <a href="/category/{{ page.category }}">
+		          <strong class="category">{{ page.category }}</strong>
+		        </a>
+		      </span>
+		    {% endif %}
                 </p>
                 <h1 class="post-title">{{ page.title }}</h1>
-                <p class="post-subtitle">{{ page.subtitle }}</p>
+		{% if page.subtitle %}
+                    <p class="post-subtitle">{{ page.subtitle }}</p>
+		{% endif %}
+		<div class="tags">
+		  <p>
+		    {% for tag in page.tags %}
+                        <a href="/tags/#{{ tag | slugify }}">#{{ tag }}</a>
+		    {% endfor %}
+		  </p>
+		</div>
 
 
                 {% include pagination-post.html progressBar=true %}
