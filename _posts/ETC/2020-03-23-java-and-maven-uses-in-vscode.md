@@ -4,8 +4,8 @@ layout: post
 title: "vscode에서 java, maven 개발환경 설정하기"
 subtitle:
 description:
-image:
-optimized_image:
+image: https://user-images.githubusercontent.com/31606119/77272593-efd8bc00-6cf4-11ea-91f7-be58df444d5a.png
+optimized_image: https://user-images.githubusercontent.com/31606119/77272593-efd8bc00-6cf4-11ea-91f7-be58df444d5a.png
 category: ETC
 tags:
   - ETC
