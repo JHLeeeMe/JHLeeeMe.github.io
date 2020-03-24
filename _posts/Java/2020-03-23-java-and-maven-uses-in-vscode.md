@@ -8,7 +8,7 @@ image: https://user-images.githubusercontent.com/31606119/77272593-efd8bc00-6cf4
 optimized_image: https://user-images.githubusercontent.com/31606119/77272593-efd8bc00-6cf4-11ea-91f7-be58df444d5a.png
 category: Java
 tags:
-  - java
+  - Java
   - vscode
   - maven
 author: JHLeeeMe

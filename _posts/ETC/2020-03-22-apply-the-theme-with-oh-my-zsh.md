@@ -10,7 +10,7 @@ category: ETC
 tags:
   - ETC
   - ZSH
-  - Oh-My-Zsh
+  - Oh-My-Zsh!
 author: JHLeeeMe
 paginate: false
 ---
