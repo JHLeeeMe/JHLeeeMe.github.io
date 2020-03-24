@@ -1,7 +1,7 @@
 ---
 date: 2020-03-24 03:41:44
 layout: post
-title: "maven으로 jar파일 생성 & 실행"
+title: "Maven으로 jar파일 생성 & 실행"
 subtitle:
 description:
 image: https://user-images.githubusercontent.com/31606119/77388393-5207ee80-6dd3-11ea-8f8a-f2b99549741c.png
