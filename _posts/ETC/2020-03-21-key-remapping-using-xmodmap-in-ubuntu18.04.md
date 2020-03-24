@@ -39,9 +39,10 @@ numpad_7 = 79,  numpad_4 = 80,  numpad_8 = 81,  numpad_5 = 83,  numpad_9 = 84, n
 ### .Xmodmap 을 열고 내용 수정
 ```$ vi ~/.Xmodmap```
 
-key code 118의 내용을 key code 79에 옮겨 적는다.
-  ex) keycode  79 = KP_Home KP_7 KP_Home KP_7로 돼있는걸
-      keycode  79 = Insert NoSymbol Insert 로.... (keycode 118 = Insert NoSymbol Insert)
+key code 118의 내용을 key code 79에 옮겨 적는다.  
+ex) ```keycode  79 = KP_Home KP_7 KP_Home KP_7```로 돼있는걸  
+```keycode  79 = Insert NoSymbol Insert```로...  
+(keycode 118 = Insert NoSymbol Insert)
 
 이런 식으로 위에서 알아낸 넘패드 key code 내용들을 죄다 바꿔버린다.
 
