@@ -1,7 +1,7 @@
 ---
 date: 2020-03-24 06:16:35
 layout: post
-title: "vscode 삭제하기"
+title: "vscode 완전히 삭제하기"
 subtitle: "build failed, do you want to continue? 에러 메세지"
 description:
 image: https://user-images.githubusercontent.com/31606119/77394614-2ab91d80-6de3-11ea-9ec1-1d3446c6b04f.png
