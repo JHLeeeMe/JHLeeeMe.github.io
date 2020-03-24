@@ -6,12 +6,11 @@ subtitle:
 description:
 image: https://user-images.githubusercontent.com/31606119/77272593-efd8bc00-6cf4-11ea-91f7-be58df444d5a.png
 optimized_image: https://user-images.githubusercontent.com/31606119/77272593-efd8bc00-6cf4-11ea-91f7-be58df444d5a.png
-category: ETC
+category: Java
 tags:
-  - ETC
+  - java
   - vscode
   - maven
-  - java
 author: JHLeeeMe
 paginate: false
 ---
