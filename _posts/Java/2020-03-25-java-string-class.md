@@ -4,8 +4,8 @@ layout: post
 title: "Java String Class"
 subtitle: "문자열 다루기"
 description:
-image: https://user-images.githubusercontent.com/31606119/77519358-b190f780-6ec2-11ea-8726-737a73edbc03.png
-optimized_image: https://user-images.githubusercontent.com/31606119/77519358-b190f780-6ec2-11ea-8726-737a73edbc03.png
+image: https://user-images.githubusercontent.com/31606119/77541884-afda2a80-6ee8-11ea-8091-9e66a0963ff2.png
+optimized_image: https://user-images.githubusercontent.com/31606119/77541884-afda2a80-6ee8-11ea-8091-9e66a0963ff2.png
 category: Java
 tags:
   - Java
@@ -220,7 +220,7 @@ true
 * ```equals()```
 
 ### 참고) Difference between '==' and equals()
-```primitive type:``` ***int, float, double, byte, long 등...  
+```primitive type:``` int, float, double, byte, long 등...  
 ```CBV(Call By Value), 값에 의한 호출```  
 
 ```reference type:``` Array, class 등...  
