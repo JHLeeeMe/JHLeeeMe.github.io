@@ -141,3 +141,8 @@ true
 reference type인 문자열은 ```주솟값```을 참조하는데...  
 ```String Pool```로 인해 ```주솟값```과 ```데이터 값```이 다를 수 있으므로 문자열의 데이터 값을 비교하고자 한다면 ```데이터 값```을 비교하는 메서드 ```equals()```를 쓰는게 안전하며.  
 문자열 생성시에는 ```Double Quotes``` 방법을 지향하자...
+
+---
+
+## 참고 사이트
+주소: [https://www.javastring.net](https://www.javastring.net)
