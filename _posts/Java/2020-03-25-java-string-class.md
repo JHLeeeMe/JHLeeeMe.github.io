@@ -229,7 +229,7 @@ true
 '=='는 주소값을 비교
 ```java
 String a = "abc";
-String b = a;
+String b = "abc";
 String c = new String("abc");
 
 System.out.println(System.identityHashCode(a));
