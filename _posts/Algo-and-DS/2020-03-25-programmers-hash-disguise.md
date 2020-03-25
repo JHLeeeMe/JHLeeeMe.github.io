@@ -1,7 +1,7 @@
 ---
 date: 2020-03-25 05:54:30
 layout: post
-title: "[프록래머스] 해시, 위장"
+title: "[프로그래머스] 해시, 위장"
 subtitle:
 description:
 image: https://user-images.githubusercontent.com/31606119/77444979-dab47800-6e2f-11ea-943e-40806166e093.jpg
