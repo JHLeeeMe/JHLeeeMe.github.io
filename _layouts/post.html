@@ -122,7 +122,7 @@
             "@context": "http://schema.org",
             "@type": "BlogPosting",
             "name": "{{ page.title }}",
-            "headline": "{{ page.subtitle }}",
+            "headline": "{{ page.title }}",
 	    "description": "{{ page.content | strip_html | strip_newlines | truncate: 160 }}",
             "image": "{{ page.image }}",
             "url": "{{ page.url | prepend: site.baseurl | prepend: site.url }}",
