@@ -123,7 +123,7 @@
             "@type": "BlogPosting",
             "name": "{{ page.title }}",
             "headline": "{{ page.subtitle }}",
-            "description": "{{ page.description }}",
+	    "description": "{{ page.content | strip_html | strip_newlines | truncate: 160 }}",
             "image": "{{ page.image }}",
             "url": "{{ page.url | prepend: site.baseurl | prepend: site.url }}",
             "articleBody": "{{ content | strip_html | xml_escape | textilize }}",
