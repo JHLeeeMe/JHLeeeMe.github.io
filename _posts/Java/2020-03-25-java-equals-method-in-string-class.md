@@ -61,7 +61,7 @@ public class JavaStringPool {
 ---
 
 ## '=='연산자와 equals()의 차이
-값의 호출엔 두 종류가 있다.
+호출엔 두 종류가 있다.
 1. CBV(Call By Value), 값에 의한 호출  
 => ```primitive type``` (int, float, byte 등...)
 2. CBR(Call By Reference), 참조 의한 호출  
