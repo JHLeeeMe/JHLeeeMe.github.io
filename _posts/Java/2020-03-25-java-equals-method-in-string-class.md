@@ -145,4 +145,4 @@ reference type인 문자열은 ```주솟값```을 참조하는데...
 ---
 
 ## 참고 사이트
-주소: [https://www.javastring.net](https://www.javastring.net)
+주소: [https://www.javastring.net/java/string/pool](https://www.javastring.net/java/string/pool)
