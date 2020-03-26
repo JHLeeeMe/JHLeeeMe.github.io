@@ -24,7 +24,11 @@
     {% if page.description %}
         {% assign description = page.description | strip_html | strip_newlines | truncate: 160 %}
     {% else %}
-        {% assign description = site.description %}
+        {% if page.content %}
+	    {% assign description = page.content | strip_html | strip_newlines | truncate: 160 %}
+	{% else %}
+            {% assign description = site.description %}
+	{% endif %}
     {% endif %}
 
     {% assign url = '' %}
