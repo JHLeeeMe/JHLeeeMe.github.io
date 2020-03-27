@@ -1,7 +1,7 @@
 ---
 date: 2020-03-27 08:14:07
 layout: post
-title: "Linux에서 파일 인코딩 변경(iconv command)"
+title: "Linux의 iconv 명령어 (파일 인코딩 변경)"
 subtitle:
 description:
 image:
