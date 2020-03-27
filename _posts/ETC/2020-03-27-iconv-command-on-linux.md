@@ -4,8 +4,8 @@ layout: post
 title: "Linux의 iconv 명령어 (파일 인코딩 변경)"
 subtitle:
 description:
-image:
-optimized_image:
+image: https://user-images.githubusercontent.com/31606119/77736344-6f48f100-704f-11ea-9a60-4b12ac046c4b.png
+optimized_image: https://user-images.githubusercontent.com/31606119/77736344-6f48f100-704f-11ea-9a60-4b12ac046c4b.png
 category: ETC
 tags:
   - ETC
