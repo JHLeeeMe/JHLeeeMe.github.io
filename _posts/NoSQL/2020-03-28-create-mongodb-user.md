@@ -59,7 +59,7 @@ security:
 
 ## 4. 생성한 유저로 연결
 -- 방법은 여러 가지 있다.  
--- password는 생략 가능, default(27017)는 생략가능  
+-- password는 생략 가능, default port(27017)는 생략가능  
 
 ### 방법 1.
 
