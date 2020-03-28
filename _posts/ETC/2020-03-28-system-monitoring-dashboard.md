@@ -147,23 +147,35 @@ $ influx
 user: admin
 password: admin
 ```
+<a href="https://user-images.githubusercontent.com/31606119/77818257-679f5000-7114-11ea-89ff-97a95b2bba7a.png">
 ![0](https://user-images.githubusercontent.com/31606119/77818257-679f5000-7114-11ea-89ff-97a95b2bba7a.png)
+</a>
 
 -- Create a data source (influxDB)
+<a href="https://user-images.githubusercontent.com/31606119/77818258-69691380-7114-11ea-9b25-09e63e34db8f.png">
 ![1](https://user-images.githubusercontent.com/31606119/77818258-69691380-7114-11ea-9b25-09e63e34db8f.png)
+</a>
 
 -- ```InfluxDB default-PORT```: 8086  
 -- ```db```: system_metrics_db  
 -- ```user/password```: admin/admin
+<a href="https://user-images.githubusercontent.com/31606119/77818259-6a01aa00-7114-11ea-873b-83c2c3da7051.png">
 ![2](https://user-images.githubusercontent.com/31606119/77818259-6a01aa00-7114-11ea-873b-83c2c3da7051.png)
+</a>
 
 -- New dashboard  
 -- 방금 만든 InfluxDBTest data source 선택
+<a href="https://user-images.githubusercontent.com/31606119/77818260-6a9a4080-7114-11ea-8087-e0f19da19c34.png">
 ![3](https://user-images.githubusercontent.com/31606119/77818260-6a9a4080-7114-11ea-8087-e0f19da19c34.png)
+</a>
 
 -- SQL문으로 편집하기위해 연필 모양 아이콘 클릭
+<a href="https://user-images.githubusercontent.com/31606119/77818261-6b32d700-7114-11ea-9bd4-20f501ed9954.png">
 ![4](https://user-images.githubusercontent.com/31606119/77818261-6b32d700-7114-11ea-9bd4-20f501ed9954.png)
+</a>
+<a href="https://user-images.githubusercontent.com/31606119/77818262-6bcb6d80-7114-11ea-8581-1578fb68f58e.png">
 ![5](https://user-images.githubusercontent.com/31606119/77818262-6bcb6d80-7114-11ea-8581-1578fb68f58e.png)
+</a>
 
 -- ```field key``` 는 influxDB에서 확인하면 된다.
 ```bash
@@ -172,17 +184,23 @@ $ influx
   > use system_metrics_db
   > show field keys
 ```
+<a href="https://user-images.githubusercontent.com/31606119/77818263-6c640400-7114-11ea-9218-dda69a27d4ba.png">
 ![6](https://user-images.githubusercontent.com/31606119/77818263-6c640400-7114-11ea-9218-dda69a27d4ba.png)
+</a>
 -- fluent-bit에서 설정한 ```tag name``` 으로 ```테이블(?) 네임```이 결정된다.  
 -- 기존에 있던걸 찍어서 위에 설정한 것과 이름이 다를 것이다.
 
 -- ```Visualization Tab```에서 여러 가지 설정을 만질 수 있음.
+<a href="https://user-images.githubusercontent.com/31606119/77818264-6cfc9a80-7114-11ea-83f9-e99b437f547e.png">
 ![7](https://user-images.githubusercontent.com/31606119/77818264-6cfc9a80-7114-11ea-83f9-e99b437f547e.png)
+</a>
 
 ---
 
 ## 결과 화면
+<a href="https://user-images.githubusercontent.com/31606119/77818265-6cfc9a80-7114-11ea-91b7-e9fcb0e0ab98.png">
 ![8](https://user-images.githubusercontent.com/31606119/77818265-6cfc9a80-7114-11ea-91b7-e9fcb0e0ab98.png)
+</a>
 Google Compute Engine에서 적용하는데  
 free tier라 influxdb는 메모리 부족으로 켜지지도 않고,  
 컴퓨터 멈추고 그래서 사양 업그레이드를 했다.  
