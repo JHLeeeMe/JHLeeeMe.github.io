@@ -1,7 +1,7 @@
 ---
 date: 2020-03-29 08:50:29
 layout: post
-title: "how-to-install-spark-and-zeppelin"
+title: "Spark & Zeppelin 설치하기"
 subtitle:
 description:
 image: https://user-images.githubusercontent.com/31606119/77845481-3ee98a00-71ea-11ea-8f3e-ead4bc957564.png
