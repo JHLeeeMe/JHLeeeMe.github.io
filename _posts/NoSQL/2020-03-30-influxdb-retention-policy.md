@@ -3,7 +3,7 @@ date: 2020-03-30 07:52:33
 layout: post
 title: "[InfluxDB] Retention Policy란? & 설정 방법"
 subtitle:
-description: "influxDb의 retention policy는 무엇이고, 설정 방법은 어떻게 되는지 알아보자."
+description: "influxDB의 retention policy는 무엇이고, 설정 방법은 어떻게 되는지 알아보자."
 image: https://user-images.githubusercontent.com/31606119/77902496-3e212880-72bc-11ea-88a1-6b6355d632d7.jpg
 optimized_image: https://user-images.githubusercontent.com/31606119/77902496-3e212880-72bc-11ea-88a1-6b6355d632d7.jpg
 category: NoSQL
