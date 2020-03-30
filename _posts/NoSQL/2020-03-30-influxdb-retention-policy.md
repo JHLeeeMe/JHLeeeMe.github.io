@@ -71,9 +71,12 @@ $ Influx
 ```default```: 현재 database의 기본 정책 인가?
 
 ### retention policy를 다루는 방법
-1. 자동으로 생성된 RP(retention policy)를 수정 (ALTER retention policy)
-2. 자동 생성된 RP는 그대로 두고, 새로운 RP 생성 (CREATE retention policy)
-3. database 생성 시점에서 정의 (CREATE database [database_name] WITE [RP_option])
+1. 자동으로 생성된 RP(retention policy)를 수정  
+-- ```ALTER retention policy```
+2. 자동 생성된 RP는 그대로 두고, 새로운 RP 생성  
+-- ```CREATE retention policy```
+3. database 생성 시점에서 정의  
+-- ```CREATE database [database_name] WITH [RP_option]```
 
 ---
 
