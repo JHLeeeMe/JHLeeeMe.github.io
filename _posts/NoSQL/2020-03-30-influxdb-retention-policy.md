@@ -62,7 +62,7 @@ $ Influx
 ```
 ![2](https://user-images.githubusercontent.com/31606119/77889267-91897b80-72a8-11ea-813e-edba2908a4c6.png)
 
-위 그림을 보면 ```"autogen"``` 이라는 이름으로 자동생성 돼었다.  
+위 그림을 보면 ```"autogen"``` 이라는 이름으로 자동생성 돼있다.  
 구조를 보자.  
 ```name```: retention policy name  
 ```duration```: influxDB가 data를 얼마나 보존하는가  
