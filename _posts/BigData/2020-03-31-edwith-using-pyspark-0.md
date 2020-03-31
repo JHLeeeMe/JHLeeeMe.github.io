@@ -23,7 +23,7 @@ paginate: false
 
 ---
 
-### PySpark를 활용해 탐색적 데이터 분석(EDA)에 대한 강의
+### PySpark를 활용한 탐색적 데이터 분석(EDA) 강의
 
 ### 강의는 챕터가 총 5개로
 -- Chapter 0. 강의에 대한 설명 및 추천 학습 방법  
