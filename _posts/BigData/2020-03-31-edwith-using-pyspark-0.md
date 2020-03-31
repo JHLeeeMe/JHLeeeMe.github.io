@@ -33,8 +33,8 @@ paginate: false
 -- Chapter 4. 이후의 학습 방법  
 
 이렇게 있다.  
-강의에서 소개하는 환경은 Databricks Cloud를 이용하는 방법인데,  
-본인은 로컬환경에 Zeppelin으로 학습을 진행 하므로 aws Access Key 부분 말고는 넘어갈 예정이다.  
+강의에서의 Spark 환경은 Databricks Cloud를 이용하는 방법인데,  
+본인은 로컬환경에 Zeppelin으로 학습을 진행 하므로 ```Chapter 1``` 은 aws Access Key 부분 말고는 넘어갈 예정이다.  
 학습 데이터를 aws S3에서 가져와야 하기 때문이다.
 
 로컬 환경에서 Spark, Zeppelin 환경 구성하는 방법은 본인 블로그에 기재 해놨다.  
