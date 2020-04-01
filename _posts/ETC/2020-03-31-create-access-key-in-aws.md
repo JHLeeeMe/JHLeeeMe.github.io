@@ -14,8 +14,9 @@ author: JHLeeeMe
 paginate: false
 ---
 
-데이터가 AWS S3에 있고,  
-S3에 접근하기 위해선 본인의 AWS계정의 Acess Key를 설정 해야한다.  
+데이터가 AWS S3에 있고, S3에 접근하기 위해선  
+공개된 저장소라 할지라도  
+본인의 AWS계정의 Acess Key가 있어야 한다.   
 AWS 계정이 있다고 가정하고 진행
 
 ## 1. IAM 서비스
