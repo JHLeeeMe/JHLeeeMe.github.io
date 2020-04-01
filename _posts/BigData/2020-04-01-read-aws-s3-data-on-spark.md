@@ -96,7 +96,7 @@ $ vi spark-defaults.conf
 파일 수정이 완료됐다면 Spark를 재실행   
 Zeppelin을 사용하고 있다면 마찬가지로 재실행
 
-## 추가)
+### 추가)
 1번 단계에서 ```$SPARK_HOME/jars/``` 가 아닌 다른 경로에 jar파일을 저장했다면,  
 설정으로 아래 내용을 추가해 주어야 한다.
 ```scala
