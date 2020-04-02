@@ -16,9 +16,9 @@ paginate: false
 
 ## db.collection.find(query, projection)
 
-### 초기화  
+### 초기화
 ```sql
-db.test.insertMany([ 
+db.test.insertMany([
     {
         "name"  : "Kim",
         "age"   : 22,
@@ -31,7 +31,7 @@ db.test.insertMany([
         "name"  : "Choi",
         "age"   : 44,
         "major" : "Korean"}
- ])
+])
 ```
 
 ---
