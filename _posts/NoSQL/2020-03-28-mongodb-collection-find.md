@@ -3,7 +3,7 @@ date: 2020-03-28 05:55:36
 layout: post
 title: "[MongoDB] db.collection.find() 정리"
 subtitle:
-description:
+description: "mongoDB.collection.find() 정리"
 image: https://user-images.githubusercontent.com/31606119/77815330-4c751600-70fd-11ea-8284-7ecae648ea28.png
 optimized_image: https://user-images.githubusercontent.com/31606119/77815330-4c751600-70fd-11ea-8284-7ecae648ea28.png
 category: NoSQL
