@@ -15,20 +15,22 @@ author: JHLeeeMe
 paginate: false
 ---
 
-pyenv로 해당 버전 install  
+### pyenv로 해당 버전 install
 ```$ pyenv install {version}```
 
-그런데 에러가 났다.  
+### 그런데 에러가 났다.
 ``` 'The Python ssl extension was not compiled. Missing the OpenSSL lib?' ```
 
-필요 패키지들을 설치해도 같은 에러
+### 필요 패키지들을 설치해도 같은 에러
 ```bash
+#!/usr/bin/env bash
+
 $ sudo aptinstall -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
 libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
 xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
 ```
 
-우분투 18.04 버전에서는 이걸 설치해주라고 함  
+### 우분투 18.04 버전에서는 이걸 설치해주라고 함
 ```$ sudo apt install openssl1.0-dev```
 
 해결됨
