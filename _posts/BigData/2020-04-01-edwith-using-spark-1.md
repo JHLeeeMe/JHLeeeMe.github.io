@@ -170,6 +170,7 @@ Zeppelin 상에서 작업중이라면 ```z.show(raw_df)``` 을 통해 이쁘게 
 
 다음 글에서는  
 이 데이터를 클렌징 해보겠다.
+### 다음 글: [2. 데이터 전처리](https://jhleeeme.github.io/edwith-using-spark-2/)
 
 ---
 
