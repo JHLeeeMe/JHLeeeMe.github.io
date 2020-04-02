@@ -3,7 +3,7 @@ date: 2020-03-20 06:25:38
 layout: post
 title: "Ubuntu 18.04에서 pyenv로 python설치 시 openssl 에러 해결방법"
 subtitle: 
-description:
+description: "Ubuntu 18.04에서 pyenv로 python설치 시 openssl 에러 해결방법"
 image: https://user-images.githubusercontent.com/31606119/77141408-2a0d4800-6ac0-11ea-82c2-daa0a1e2e8ea.png
 optimized_image: https://user-images.githubusercontent.com/31606119/77141408-2a0d4800-6ac0-11ea-82c2-daa0a1e2e8ea.png
 category: ETC
