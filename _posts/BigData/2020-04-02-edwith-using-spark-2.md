@@ -223,25 +223,25 @@ Output:
 #!/usr/bin/env scala
 
 
-import org.apache.spark.sql.SparkSession                              
-                                                                      
-val spark = SparkSession                                              
-  .builder()                                                          
-  .appName("Spark EDA")                                               
-  .getOrCreate()                                                      
-                                                                      
+import org.apache.spark.sql.SparkSession
+
+val spark = SparkSession
+  .builder()
+  .appName("Spark EDA")
+  .getOrCreate()
+
 // RDD를 DataFrame으로 바꾸는 것과 같은 암시적 변환(implicit conversion)을 처리하기 위해                                                    
-import spark.implicits._                                              
-                                                                      
-val raw_df = spark.read                                               
-  .option("header", "true")                                           
-  .option("inferSchema", "true")                                      
-  .csv("s3a://edwith-pyspark-dataset")                                
-                                                                      
-// OR                                                                 
-//                                                                    
-//val raw_df = spark.read                                             
-//  .options(Map("header"-> "true", "inferSchema"-> "true"))          
+import spark.implicits._
+
+val raw_df = spark.read
+  .option("header", "true")
+  .option("inferSchema", "true")
+  .csv("s3a://edwith-pyspark-dataset")
+
+// OR
+//   
+//val raw_df = spark.read             
+//  .options(Map("header"-> "true", "inferSchema"-> "true"))
 //  .csv("s3a://edwith-pyspark-dataset")
 
 
@@ -250,15 +250,15 @@ import org.apache.spark.sql.functions.udf
 // 'UDFs' 라는 이름의 싱글턴 객체 안에
 // udf로 변환할 메서드들 정의
 object UDFs {                                                         
-    def stringToInteger(value: String): Option[Int] = {               
-        if ((value.isEmpty) || (value == "NA")) None                  
-        else Some(value.toInt)                                        
-    }                                                                 
-                                                                      
-    def integerToBoolean(value: Int): Boolean ={                      
-        if (value == 0) false                                         
-        else true                                                     
-    }                                                                 
+    def stringToInteger(value: String): Option[Int] = {
+        if ((value.isEmpty) || (value == "NA")) None
+        else Some(value.toInt)
+    }
+                                                       
+    def integerToBoolean(value: Int): Boolean ={
+        if (value == 0) false
+        else true
+    }
 }
 
 // udf 변환

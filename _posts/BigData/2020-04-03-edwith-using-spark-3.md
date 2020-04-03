@@ -143,87 +143,87 @@ only showing top 20 rows
 #!/usr/bin/env scala
 
 
-import org.apache.spark.sql.SparkSession                              
-                                                                      
-val spark = SparkSession                                              
-  .builder()                                                          
-  .appName("Spark EDA")                                               
+import org.apache.spark.sql.SparkSession
+
+val spark = SparkSession
+  .builder()
+  .appName("Spark EDA")
   .getOrCreate()
 
-// RDD를 DataFrame으로 바꾸는 것과 같은 암시적 변환(implicit conversion)을 처리하기 위해                                                    
-import spark.implicits._                                              
-                                                                      
-val raw_df = spark.read                                               
-  .option("header", "true")                                           
-  .option("inferSchema", "true")                                      
-  .csv("s3a://edwith-pyspark-dataset")                                
-                                                                      
-// OR                                                                 
-//                                                                    
-//val raw_df = spark.read                                             
-//  .options(Map("header"-> "true", "inferSchema"-> "true"))          
-//  .csv("s3a://edwith-pyspark-dataset")                              
-                                                                      
-                                                                      
-import org.apache.spark.sql.functions.udf                             
-                                                                      
-// 'UDFs' 라는 이름의 싱글턴 객체 안에                                
-// udf로 변환할 메서드들 정의                                         
-object UDFs {                                                         
-    def stringToInteger(value: String): Option[Int] = {               
-        if ((value.isEmpty) || (value == "NA")) None                  
-        else Some(value.toInt)                                        
-    }                                                                 
-                                                                      
-    def integerToBoolean(value: Int): Boolean ={                      
-        if (value == 0) false                                         
-        else true                                                     
-    }                                                                 
+// RDD를 DataFrame으로 바꾸는 것과 같은 암시적 변환(implicit conversion)을 처리하기 위해
+import spark.implicits._
+
+val raw_df = spark.read
+  .option("header", "true")
+  .option("inferSchema", "true")
+  .csv("s3a://edwith-pyspark-dataset")
+
+// OR
+// 
+//val raw_df = spark.read
+//  .options(Map("header"-> "true", "inferSchema"-> "true"))
+//  .csv("s3a://edwith-pyspark-dataset")
+
+
+import org.apache.spark.sql.functions.udf
+
+// 'UDFs' 라는 이름의 싱글턴 객체 안에
+// udf로 변환할 메서드들 정의
+object UDFs {
+    def stringToInteger(value: String): Option[Int] = {
+        if ((value.isEmpty) || (value == "NA")) None
+        else Some(value.toInt)
+    }
+
+    def integerToBoolean(value: Int): Boolean ={
+        if (value == 0) false
+        else true
+    }
 }
 
-// udf 변환                                                           
-val stringToIntegerFunction = udf(UDFs.stringToInteger _)             
-val integerToBooleanFunction = udf(UDFs.integerToBoolean _)           
-                                                                      
-// udf을 활용한 데이터 처리                                           
-val us_carrier_df = raw_df                                            
-    .drop(                                                            
-        // 사용하지 않을 column 삭제                                  
-        "DepTime", "CRSDepTime", "ArrTime", "CRSArrTime", "AirTime", "ArrDelay", "DepDelay", "TaxiIn", "TaxiOut",                           
-        "CancellationCode", "CarrierDelay", "WeatherDelay", "NASDelay", "SecurityDelay", "LateAircraftDelay")                               
-    .withColumn(                                                      
-        // 'NA' to null & Integer type으로 변경                       
-        "ActualElapsedTime", stringToIntegerFunction(raw_df("ActualElapsedTime")))                                                          
-    .withColumn(                                                      
-        // 'NA' to null & Integer type으로 변경                       
-        "CRSElapsedTime", stringToIntegerFunction(raw_df("CRSElapsedTime")))                                                                
-    .withColumn(                                                      
-        // 'NA' to null & Integer type으로 변경                       
-        "TailNum", stringToIntegerFunction(raw_df("TailNum")))        
-    .withColumn(                                                      
-        // 'NA' to null & Integer type으로 변경                       
-        "Distance", stringToIntegerFunction(raw_df("Distance")))      
-    .withColumn(                                                      
-        // Boolean type으로 변경                                      
-        "Cancelled", integerToBooleanFunction(raw_df("Cancelled")))   
-    .withColumn(                                                      
-        // Boolean type으로 변경                                      
+// udf 변환
+val stringToIntegerFunction = udf(UDFs.stringToInteger _)
+val integerToBooleanFunction = udf(UDFs.integerToBoolean _)
+
+// udf을 활용한 데이터 처리
+val us_carrier_df = raw_df
+    .drop(
+        // 사용하지 않을 column 삭제
+        "DepTime", "CRSDepTime", "ArrTime", "CRSArrTime", "AirTime", "ArrDelay", "DepDelay", "TaxiIn", "TaxiOut",
+        "CancellationCode", "CarrierDelay", "WeatherDelay", "NASDelay", "SecurityDelay", "LateAircraftDelay")
+    .withColumn(
+        // 'NA' to null & Integer type으로 변경
+        "ActualElapsedTime", stringToIntegerFunction(raw_df("ActualElapsedTime")))
+    .withColumn(
+        // 'NA' to null & Integer type으로 변경
+        "CRSElapsedTime", stringToIntegerFunction(raw_df("CRSElapsedTime")))
+    .withColumn(
+        // 'NA' to null & Integer type으로 변경
+        "TailNum", stringToIntegerFunction(raw_df("TailNum")))
+    .withColumn(
+        // 'NA' to null & Integer type으로 변경
+        "Distance", stringToIntegerFunction(raw_df("Distance")))
+    .withColumn(
+        // Boolean type으로 변경
+        "Cancelled", integerToBooleanFunction(raw_df("Cancelled")))
+    .withColumn(
+        // Boolean type으로 변경
         "Diverted", integerToBooleanFunction(raw_df("Diverted")))
 
-// Schema 확인                                                        
-us_carrier_df.printSchema()                                           
-                                                                      
-// 실제 데이터 확인                                                   
-us_carrier_df.show()                                                  
-                                                                      
-// 캐싱                                                               
-us_carrier_df.cache()                                                 
-                                                                      
+// Schema 확인
+us_carrier_df.printSchema()
+
+// 실제 데이터 확인
+us_carrier_df.show()
+
+// 캐싱
+us_carrier_df.cache()
+
 // 전역 임시 뷰 생성                                                  
-us_carrier_df.createOrReplaceGlobalTempView("us_carrier")                      
-                                                                      
-// SQL문으로 조회                                                     
-spark.sql("SELECT * FROM global_temp.us_carrier limit 10")            
+us_carrier_df.createOrReplaceGlobalTempView("us_carrier")
+
+// SQL문으로 조회
+spark.sql("SELECT * FROM global_temp.us_carrier limit 10")
 
 
 // 'UniqueCarrier' column만을 가지는 DataFrame
