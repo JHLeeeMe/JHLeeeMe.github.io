@@ -22,17 +22,20 @@ PySpark이 아닌 Scala Spark으로 진행
                                                                       
 ---                                                                   
                                                                       
-이전 강의까지 해서 데이터 전처리를 끝냈다.  
-이제 전처리한 데이터를 가지고 분석해보자.
 ### 이전 강의: [2. 데이터 전처리](https://jhleeeme.github.io/edwith-using-spark-2/)
+이전 강의까지 해서 데이터 전처리를 끝냈다.  
+이제 전처리한 데이터를 가지고 분석해보자.  
+이번 강의에선 ```DataFrame API```, ```SQL```을 활용해 항공사를 살펴보겠다.
 
 ---
 ## 항공사 살펴보기
-1. ```DataFrame API```를 활용한 조회
-2. ```SQL```을 활용한 조회
+1. ```DataFrame API```를 활용한 조회  
+-- DataFrame#```select()```  
+-- DataFrame#```distinct()```
+2. ```SQL```을 활용한 조회  
 
 ### 1. DataFrame API
--- ```'UniqueCarrier'``` column만을 가지는 DataFrame
+-- ```select()``` 메서드를 이용한 ```'UniqueCarrier'``` column 추출
 ```scala
 #!/usr/bin/env scala
 
@@ -101,7 +104,7 @@ only showing top 20 rows
 #!/usr/bin/env scala
 
 
-spark.sql("SELECT DISTINCT UniqueCarrier FROM us_carrier").show()
+spark.sql("SELECT DISTINCT UniqueCarrier FROM global_temp.us_carrier").show()
 
 ----------------------------------------------------------------
 Output:
@@ -217,7 +220,7 @@ us_carrier_df.show()
 us_carrier_df.cache()                                                 
                                                                       
 // 전역 임시 뷰 생성                                                  
-us_carrier_df.createGlobalTempView("us_carrier")                      
+us_carrier_df.createOrReplaceGlobalTempView("us_carrier")                      
                                                                       
 // SQL문으로 조회                                                     
 spark.sql("SELECT * FROM global_temp.us_carrier limit 10")            
@@ -229,7 +232,7 @@ val carriers_only_df = us_carrier_df.select("UniqueCarrier")
 // distinct() 메서드를 이용한 유니크 값 추출 (시간 소요가 조금 있다.)
 val carriers_only_distinct_df = carriers_only_df.distinct()
 // same as
-// spark.sql("SELECT DISTINCT UniqueCarrier FROM us_carrier").show()
+// spark.sql("SELECT DISTINCT UniqueCarrier FROM global_temp.us_carrier").show()
 
 carriers_only_distinct_df.show()
 ```                                                                   

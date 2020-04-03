@@ -34,6 +34,7 @@ PySpark이 아닌 Scala Spark으로 진행
 ```scala
 #!/usr/bin/env scala
 
+
 import org.apache.spark.sql.SparkSession
 
 val spark = SparkSession
@@ -74,6 +75,7 @@ val raw_df = spark.read
 먼저 schema를 확인해보자.
 ```scala
 #!/usr/bin/env scala
+
 
 raw_df.printSchema()
 
@@ -119,6 +121,7 @@ root
 이제 갯수를 보자.
 ```scala
 #!/usr/bin/env scala
+
 
 raw_df.count()
 
@@ -177,6 +180,7 @@ Zeppelin 상에서 작업중이라면 ```z.show(raw_df)``` 을 통해 이쁘게 
 ## 전체 Code
 ```scala
 #!/usr/bin/env scala
+
 
 import org.apache.spark.sql.SparkSession
 

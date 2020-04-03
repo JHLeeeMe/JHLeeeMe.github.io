@@ -45,6 +45,7 @@ UDF(User Define Function)를 만들어보자.
 ```scala
 #!/usr/bin/env scala
 
+
 object UDFs {
     def stringToInteger(value: String): Option[Int] = {
         if ((value.isEmpty) || (value == "NA")) None
@@ -62,6 +63,7 @@ object UDFs {
 ```scala
 #!/usr/bin/env scala
 
+
 import org.apache.spark.sql.functions.udf
 
 val stringToIntegerFunction = udf(UDFs.stringToInteger _)
@@ -73,6 +75,7 @@ val integerToBooleanFunction = udf(UDFs.integerToBoolean _)
 -- 처리한 데이터 프레임을 ```us_carrier_df```에 저장
 ```scala
 #!/usr/bin/env scala
+
 
 val us_carrier_df = raw_df
     .drop(
@@ -102,6 +105,7 @@ val us_carrier_df = raw_df
 ### 4. us_carrier_df 살펴보기
 ```scala
 #!/usr/bin/env scala
+
 
 // Schema 확인
 us_carrier_df.printSchema()
@@ -160,6 +164,7 @@ only showing top 20 rows
 ```scala
 #!/usr/bin/env scala
 
+
 us_carrier_df.cache()
 ```
 
@@ -171,12 +176,13 @@ us_carrier_df.cache()
 
 ### 1. '전역 임시 뷰' 생성
 -- SQL의 VIEW  
--- ```createGlobalTempView()``` 메서드로 생성  
+-- ```createOrReplaceGlobalTempView()``` 메서드로 생성  
 -- ```createOrReplaceTempView()``` 와의 차이점은 ```전역 임시 뷰```는 다른 세션에서도 사용할 수 있음.  
 ```scala
 #!/usr/bin/env scala
 
-us_carrier_df.createGlobalTempView("us_carrier")
+
+us_carrier_df.createOrReplaceGlobalTempView("us_carrier")
 ```
 
 ### 2. SQL문으로 조회
@@ -184,6 +190,7 @@ us_carrier_df.createGlobalTempView("us_carrier")
 
 ```scala
 #!/usr/bin/env scala
+
 
 spark.sql("SELECT * FROM global_temp.us_carrier limit 10")
 
@@ -207,6 +214,7 @@ Output:
 ```
 
 다음 글 부터는 본격적으로 분석을 해보겠다.
+### 다음 글: [2. 얼마나 많은 항공사가 있을까?](https://jhleeeme.github.io/edwith-using-spark-3/)
 
 ---
 
@@ -292,7 +300,7 @@ us_carrier_df.show()
 us_carrier_df.cache()
 
 // 전역 임시 뷰 생성
-us_carrier_df.createGlobalTempView("us_carrier")
+us_carrier_df.createOrReplaceGlobalTempView("us_carrier")
 
 // SQL문으로 조회
 spark.sql("SELECT * FROM global_temp.us_carrier limit 10")
