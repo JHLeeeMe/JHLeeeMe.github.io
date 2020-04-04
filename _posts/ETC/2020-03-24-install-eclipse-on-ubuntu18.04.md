@@ -46,14 +46,14 @@ mirror를 한국서버로 바꾸자...
 ```$ sudo tar xzvf eclipse-jee-2019-12-R-linux-gtk-x86_64.tar.gz -C /opt```  
 eclipse를 실행시켜보았는데...  
 에러가 난다. PATH가 안맞는단다.
-<a href='https://user-images.githubusercontent.com/31606119/77393360-35be7e80-6de0-11ea-9841-81e4a997746c.png'>
-![2](https://user-images.githubusercontent.com/31606119/77393360-35be7e80-6de0-11ea-9841-81e4a997746c.png)
+<a href='https://user-images.githubusercontent.com/31606119/77393358-3525e800-6de0-11ea-9f1c-d2cc3fd0c350.png'>
+![1](https://user-images.githubusercontent.com/31606119/77393358-3525e800-6de0-11ea-9f1c-d2cc3fd0c350.png)
 </a>
 
 ```/opt```에 깔았으므로  
 ```eclipse.ini``` 파일을 열어 PATH설정을 해주자.
-<a href='https://user-images.githubusercontent.com/31606119/77393358-3525e800-6de0-11ea-9f1c-d2cc3fd0c350.png'>
-![1](https://user-images.githubusercontent.com/31606119/77393358-3525e800-6de0-11ea-9f1c-d2cc3fd0c350.png)
+<a href='https://user-images.githubusercontent.com/31606119/77393360-35be7e80-6de0-11ea-9841-81e4a997746c.png'>
+![2](https://user-images.githubusercontent.com/31606119/77393360-35be7e80-6de0-11ea-9841-81e4a997746c.png)
 </a>
 
 
