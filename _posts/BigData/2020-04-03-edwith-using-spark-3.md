@@ -141,6 +141,9 @@ Output:
 only showing top 20 rows
 ```
 
+다음 글엔 항공사들의 운항거리와 횟수를 살펴보겠다.
+### 다음 글: [4. 항공사들의 운항거리, 횟수 톺아보기](https://jhleeeme.github.io/edwith-using-spark-4/)
+
 ---
 
 ## 전체 Code

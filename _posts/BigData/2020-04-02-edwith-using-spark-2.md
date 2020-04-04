@@ -222,7 +222,7 @@ Output:
 ```
 
 다음 글 부터는 본격적으로 분석을 해보겠다.
-### 다음 글: [2. 얼마나 많은 항공사가 있을까?](https://jhleeeme.github.io/edwith-using-spark-3/)
+### 다음 글: [3. 얼마나 많은 항공사가 있을까?](https://jhleeeme.github.io/edwith-using-spark-3/)
 
 ---
 
