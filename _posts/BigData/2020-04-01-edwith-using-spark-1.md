@@ -22,6 +22,15 @@ PySpark이 아닌 Scala Spark으로 진행
 
 ---
 
+## 키워드
+-- ```SparkSession```  
+-- SparkSession.```read()```  
+-- DataFrame.```printSchema()```  
+-- DataFrame.```show()```  
+-- DataFrame.```count()```
+
+---
+
 ## 데이터 분석을 위한 준비 작업
 
 먼저 local 환경에서 S3 data를 읽는 방법을 모른다면 아래 링크 참고.  
@@ -50,6 +59,7 @@ import spark.implicits._
 -- S3 저장소의 data 읽어오기
 ```scala
 #!/usr/bin/env scala
+
 
 val raw_df = spark.read
   .option("header", "true")

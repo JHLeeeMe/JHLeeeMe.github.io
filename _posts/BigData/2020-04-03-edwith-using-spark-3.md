@@ -3,7 +3,7 @@ date: 2020-04-03 10:38:51
 layout: post
 title: "[Spark를 활용한 데이터분석] 3. 얼마나 많은 항공사가 있을까?"
 subtitle:
-description:
+description: "DataFrame API, SQL을 활용해 항공사들을 살펴보겠다."
 image: https://user-images.githubusercontent.com/31606119/78127900-f29f8380-744f-11ea-8a9c-664efe56712f.jpeg
 optimized_image: https://user-images.githubusercontent.com/31606119/78127900-f29f8380-744f-11ea-8a9c-664efe56712f.jpeg
 category: BigData
@@ -21,17 +21,22 @@ edwith의 PySpark를 활용한 데이터분석 강좌의 내용 정리.
 PySpark이 아닌 Scala Spark으로 진행                                   
                                                                       
 ---                                                                   
+
+## 키워드
+-- DataFrame.```select()```  
+-- DataFrame.```distinct()```  
+-- SparkSession.```sql()```
                                                                       
-### 이전 강의: [2. 데이터 전처리](https://jhleeeme.github.io/edwith-using-spark-2/)
 이전 강의까지 해서 데이터 전처리를 끝냈다.  
 이제 전처리한 데이터를 가지고 분석해보자.  
 이번 강의에선 ```DataFrame API```, ```SQL```을 활용해 항공사를 살펴보겠다.
+### 이전 강의: [2. 데이터 전처리](https://jhleeeme.github.io/edwith-using-spark-2/)
 
 ---
 ## 항공사 살펴보기
 1. ```DataFrame API```를 활용한 조회  
--- DataFrame#```select()```  
--- DataFrame#```distinct()```
+-- DataFrame.```select()```  
+-- DataFrame.```distinct()```
 2. ```SQL```을 활용한 조회  
 
 ### 1. DataFrame API
@@ -98,7 +103,7 @@ Output:
 only showing top 20 rows
 ```
 
-### 1. SQL을 활용한 조회
+### 2. SQL을 활용한 조회
 -- 마찬가지로 ```DataFrame API``` 호출 형태로 변환되어 처리되므로 결과는 같다.
 ```scala
 #!/usr/bin/env scala

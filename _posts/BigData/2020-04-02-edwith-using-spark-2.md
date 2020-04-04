@@ -3,7 +3,7 @@ date: 2020-04-02 13:05:53
 layout: post
 title: "[Spark를 활용한 데이터분석] 2. 데이터 전처리"
 subtitle:
-description:
+description: 데이터를 가공해 분석에 용이하게 변경하는 과정, 결측값 처리, 이상값 처리 등의 작업
 image: https://user-images.githubusercontent.com/31606119/78127900-f29f8380-744f-11ea-8a9c-664efe56712f.jpeg
 optimized_image: https://user-images.githubusercontent.com/31606119/78127900-f29f8380-744f-11ea-8a9c-664efe56712f.jpeg
 category: BigData
@@ -22,15 +22,23 @@ PySpark이 아닌 Scala Spark으로 진행
 
 ---
 
-# 데이터 전처리
--- 데이터 클렌징 이라고도 불림  
--- 데이터 전처리란 데이터를 가공해 분석에 용이하게 변경하는 과정  
--- 결측값 처리, 이상값 처리 등의 작업들을 말한다.
+## 키워드
+-- ```데이터 전처리```  
+-- ```UDF(User Define Function)```  
+-- DataFrame.```drop()```  
+-- DataFrame.```withcolumn()```  
+-- Temp View 생성 (for SparkSession.```sql()```)  
+-- ```cache()```
 
 이전 강의에서 Load한 데이터를 클렌징할 작정이다.
 ### 이전 강의: [1. SparkSession 객체 생성 & 데이터 Load](https://jhleeeme.github.io/edwith-using-spark-1/)
 
 ---
+
+# 데이터 전처리
+-- 데이터 클렌징 이라고도 불림  
+-- 데이터 전처리란 데이터를 가공해 분석에 용이하게 변경하는 과정  
+-- 결측값 처리, 이상값 처리 등의 작업들을 말한다.
 
 ## 전처리 작업목록
 -- 필요없는 column 제거  
