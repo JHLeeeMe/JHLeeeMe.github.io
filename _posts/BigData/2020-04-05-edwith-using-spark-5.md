@@ -312,6 +312,32 @@ us_carrier_df.filter($"distance" === 4983).show()
 
 // DataFrame.describe() 메서드로 한번에 알아보자.
 us_carrier_df.describe("distance").show()
+
+
+val us_carrier_1987_df = us_carrier_df.filter($"Year" === 1987).select($"Origin", $"Dest")
+val us_carrier_1993_df = us_carrier_df.filter($"Year" === 1993).select($"Origin", $"Dest")
+
+// 중복값 제거
+val us_carrier_1987_distinct_ds = us_carrier_1987_df.distinct()
+val us_carrier_1993_distinct_ds = us_carrier_1993_df.distinct()
+
+// 정렬 후 출력
+us_carrier_1987_distinct_ds.orderBy($"Origin", $"Dest").show()
+us_carrier_1993_distinct_ds.orderBy($"Origin", $"Dest").show()
+
+us_carrier_1987_distinct_ds.count()
+us_carrier_1993_distinct_ds.count()
+
+// SQL 문으로 표현
+// 1987년도
+spark.sql("SELECT COUNT(DISTINCT(Origin, Dest)) AS Count 
+	     FROM global_temp.us_carrier 
+	    WHERE Year = 1987").show()
+
+// 1993년도
+spark.sql("SELECT COUNT(DISTINCT(Origin, Dest)) AS COUNT 
+	     FROM global_temp.us_carrier 
+	    WHERE Year = 1993").show()
 ```                                                                   
 
 ---
