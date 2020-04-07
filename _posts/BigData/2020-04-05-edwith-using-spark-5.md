@@ -42,7 +42,7 @@ PySpark이 아닌 Scala Spark으로 진행
 ㄴ> 3. 2의 결과물에 포함된 row 수 추출 (count)
 
 ### 1. 원하는 년도의 운항 기록 추출 (fliter)
--- ```select()``` 메서드로 필요한 Column (Origin, Dest)만 추출하자.`
+-- ```select()``` 메서드로 필요한 Column (Origin, Dest)만 추출하자.
 ```scala
 #!/usr/bin/env scala
 
@@ -53,7 +53,10 @@ val us_carrier_1993_df = us_carrier_df.filter($"Year" === 1993).select($"Origin"
 
 ### 2. 1의 결과물에서 중복값 제거 (distinct)
 -- DataFrame.```distinct()```메서드로 중복값 제거  
--- 살펴보기 쉽게 DataSet.```orderBy()``` 메서드로 정렬 후 출력
+ㄴ> return ```org.apache.spark.sql.Dataset```
+
+-- 살펴보기 쉽게 DataSet.```orderBy()``` 메서드로 정렬 후 출력  
+!! 참고) ```Dataset.toDF() 메서드로 DataFrame을 만들 수 있다. 물론 orderBy() 메서드는 DataFrame 클래스에도 구현이 돼있다.```
 ```scala
 #!/usr/bin/env scala
 
@@ -173,6 +176,8 @@ Output:
 | 3425|
 +-----+
 ```
+
+### 다음 강의: [6. 가장 바쁜 공항 TOP10](https://jhleeeme.github.io/edwith-using-spark-6/)
 
 ---
 
@@ -338,7 +343,7 @@ spark.sql("SELECT COUNT(DISTINCT(Origin, Dest)) AS Count
 spark.sql("SELECT COUNT(DISTINCT(Origin, Dest)) AS COUNT 
 	     FROM global_temp.us_carrier 
 	    WHERE Year = 1993").show()
-```                                                                   
+```
 
 ---
                                                                       
