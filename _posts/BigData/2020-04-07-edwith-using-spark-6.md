@@ -102,6 +102,10 @@ dest_by_arrival_count_df: org.apache.spark.sql.DataFrame = [Dest: string, count:
 +----+------+
 only showing top 20 rows
 ```
+-- Zeppelin으로 작업할 시 ```z.show()``` 메서드를 써보자. 간단하게 시각화 가능
+<a href="https://user-images.githubusercontent.com/31606119/78661319-88805600-7909-11ea-8f25-a66c67566013.png">
+![0](https://user-images.githubusercontent.com/31606119/78661319-88805600-7909-11ea-8f25-a66c67566013.png)
+</a>
 
 ### 3. 도착 수 기준 내림차순 정렬 (orderBy)
 -- ```org.apache.spark.sql.functions.desc()``` 활용  
