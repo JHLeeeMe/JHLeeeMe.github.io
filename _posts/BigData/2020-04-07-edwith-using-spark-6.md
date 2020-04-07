@@ -139,7 +139,7 @@ only showing top 10 rows
 전 세계에서 가장 복잡한 공항 중 하나인 시카고의 오헤어 국제공항(ORD)이 1위 이다.  
 아래는 SQL문으로 작성해 보았다.
 
-### SQL문을 통한 집계
+### SQL문으로 표현
 ```scala
 #!/usr/bin/env scala
 
@@ -334,11 +334,27 @@ spark.sql("SELECT COUNT(DISTINCT(Origin, Dest)) AS COUNT
 	    WHERE Year = 1993").show()
 
 // 6. 가장 바쁜 공항 TOP10
+// 목적지 기준으로 그룹핑
 val dest_by_arrival_groupedDS = us_carrier_df.groupBy($"Dest")
 
+// row 카운팅 (=도착 수)
 val dest_by_arrival_count_df = dest_by_arrival_groupedDS.count()
 
 dest_by_arrival_count_df.show()
+
+// 내림차순 정렬 메서드
+import org.apache.spark.sql.functions.desc
+
+// 도착 수 기준으로 내림차순 정렬
+dest_by_arrival_count_df.orderBy(desc("count")).show(10)
+// same As
+//dest_by_arrival_count_df.orderBy(-$"count").show(10)
+
+// SQL 문으로 표현
+spark.sql("SELECT Dest, COUNT(*) AS Count 
+	     FROM global_temp.us_carrier 
+	    GROUP BY Dest 
+	    ORDER BY Count DESC LIMIT 10").show()
 ```                                                                   
 
 ---
