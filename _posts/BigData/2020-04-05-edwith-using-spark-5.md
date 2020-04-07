@@ -49,6 +49,12 @@ PySpark이 아닌 Scala Spark으로 진행
 
 val us_carrier_1987_df = us_carrier_df.filter($"Year" === 1987).select($"Origin", $"Dest")
 val us_carrier_1993_df = us_carrier_df.filter($"Year" === 1993).select($"Origin", $"Dest")
+
+------------------------------------------
+Output:
+
+us_carrier_1987_df: org.apache.spark.sql.DataFrame = [Origin: string, Dest: string]
+us_carrier_1993_df: org.apache.spark.sql.DataFrame = [Origin: string, Dest: string]
 ```
 
 ### 2. 1의 결과물에서 중복값 제거 (distinct)
@@ -71,8 +77,6 @@ us_carrier_1993_distinct_ds.orderBy($"Origin", $"Dest").show()
 -------------------------------------
 Output:
 
-us_carrier_1987_df: org.apache.spark.sql.DataFrame = [Origin: string, Dest: string]
-us_carrier_1993_df: org.apache.spark.sql.DataFrame = [Origin: string, Dest: string]
 us_carrier_1987_distinct_ds: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] = [Origin: string, Dest: string]
 us_carrier_1993_distinct_ds: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] = [Origin: string, Dest: string]
 
