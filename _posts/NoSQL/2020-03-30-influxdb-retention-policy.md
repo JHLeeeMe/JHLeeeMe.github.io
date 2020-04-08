@@ -67,7 +67,7 @@ $ Influx
 ```name```: retention policy name  
 ```duration```: influxDB가 data를 얼마나 보존하는가  
 ```shardGroupDuration```: shard group이 적용되는 시간 범위  
-```replicaN```: 클러스터에 저장되는 data의 본가본 수  
+```replicaN```: 클러스터에 저장되는 data의 복사본 수  
 ```default```: 현재 database의 기본 정책 인가?
 
 ### retention policy를 다루는 방법
