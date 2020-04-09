@@ -65,9 +65,11 @@ us_carrier_df.filter((col("UniqueCarrier") === "DL") && (col("Year") === 1990).s
 // us_carrier_df.filter(($"UniqueCarrier" === "DL") && ($"Year" === 1990)).show()
 
 // SQL문으로 작성시
-spark.sql("SELECT * 
-	     FROM global_temp.us_carrier 
-	    WHERE UniqueCarrier == 'DL' AND Year == 1990").show()
+spark.sql("""
+  SELECT * 
+    FROM global_temp.us_carrier 
+   WHERE UniqueCarrier == 'DL' AND Year == 1990
+""").show()
 
 ---------------------------------------------------------------
 Output:
@@ -315,7 +317,7 @@ us_carrier_df.cache()
 us_carrier_df.createOrReplaceGlobalTempView("us_carrier")
 
 // SQL문으로 조회
-spark.sql("SELECT * FROM global_temp.us_carrier limit 10")
+spark.sql("SELECT * FROM global_temp.us_carrier LIMIT 10")
 
 
 // 'UniqueCarrier' column만을 가지는 DataFrame
@@ -349,9 +351,11 @@ us_carrier_df.filter((col("UniqueCarrier") === "DL") && (col("Year") === 1990).s
 // us_carrier_df.filter(($"UniqueCarrier" === "DL") && ($"Year" === 1990)).show()
 
 // SQL문으로 작성시
-spark.sql("SELECT * 
-	     FROM global_temp.us_carrier 
-	    WHERE UniqueCarrier == 'DL' AND Year == 1990").show()
+spark.sql("""
+  SELECT * 
+    FROM global_temp.us_carrier 
+   WHERE UniqueCarrier == 'DL' AND Year == 1990
+""").show()
 
 // DL항공의 1990년도 운항 횟수
 us_carrier_df.filter(($"UniqueCarrier" === "DL") && ($"Year") === 1990).count()

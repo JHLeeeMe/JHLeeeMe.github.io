@@ -200,7 +200,7 @@ us_carrier_df.createOrReplaceGlobalTempView("us_carrier")
 #!/usr/bin/env scala
 
 
-spark.sql("SELECT * FROM global_temp.us_carrier limit 10")
+spark.sql("SELECT * FROM global_temp.us_carrier LIMIT 10")
 
 --------------------------------------------------
 Output:
@@ -311,7 +311,7 @@ us_carrier_df.cache()
 us_carrier_df.createOrReplaceGlobalTempView("us_carrier")
 
 // SQL문으로 조회
-spark.sql("SELECT * FROM global_temp.us_carrier limit 10")
+spark.sql("SELECT * FROM global_temp.us_carrier LIMIT 10")
 ```
 
 ---

@@ -148,10 +148,12 @@ only showing top 10 rows
 #!/usr/bin/env scala
 
 
-spark.sql("SELECT Dest, COUNT(*) AS Count 
-	     FROM global_temp.us_carrier 
-	    GROUP BY Dest 
-	    ORDER BY Count DESC LIMIT 10").show()
+spark.sql("""
+  SELECT Dest, COUNT(*) AS Count 
+    FROM global_temp.us_carrier 
+   GROUP BY Dest 
+   ORDER BY Count DESC LIMIT 10
+""").show()
 
 --------------------------------------------
 Output:
@@ -262,7 +264,7 @@ us_carrier_df.cache()
 us_carrier_df.createOrReplaceGlobalTempView("us_carrier")
 
 // SQL문으로 조회
-spark.sql("SELECT * FROM global_temp.us_carrier limit 10")
+spark.sql("SELECT * FROM global_temp.us_carrier LIMIT 10")
 
 
 // 'UniqueCarrier' column만을 가지는 DataFrame
@@ -296,9 +298,11 @@ us_carrier_df.filter((col("UniqueCarrier") === "DL") && (col("Year") === 1990).s
 // us_carrier_df.filter(($"UniqueCarrier" === "DL") && ($"Year" === 1990)).show()
 
 // SQL문으로 작성시
-spark.sql("SELECT * 
-	     FROM global_temp.us_carrier 
-	    WHERE UniqueCarrier == 'DL' AND Year == 1990").show()
+spark.sql("""
+  SELECT * 
+    FROM global_temp.us_carrier 
+   WHERE UniqueCarrier == 'DL' AND Year == 1990
+""").show()
 
 // DL항공의 1990년도 운항 횟수
 us_carrier_df.filter(($"UniqueCarrier" === "DL") && ($"Year") === 1990).count()
@@ -332,37 +336,43 @@ us_carrier_1993_distinct_ds.count()
 
 // SQL 문으로 표현
 // 1987년도
-spark.sql("SELECT COUNT(DISTINCT(Origin, Dest)) AS Count 
-	     FROM global_temp.us_carrier 
-	    WHERE Year = 1987").show()
+spark.sql("""
+  SELECT COUNT(DISTINCT(Origin, Dest)) AS Count 
+    FROM global_temp.us_carrier 
+   WHERE Year = 1987
+""").show()
 
 // 1993년도
-spark.sql("SELECT COUNT(DISTINCT(Origin, Dest)) AS COUNT 
-	     FROM global_temp.us_carrier 
-	    WHERE Year = 1993").show()
+spark.sql("""
+  SELECT COUNT(DISTINCT(Origin, Dest)) AS COUNT 
+    FROM global_temp.us_carrier 
+   WHERE Year = 1993
+""").show()
 
 // 6. 가장 바쁜 공항 TOP10
-// 목적지 기준으로 그룹핑
+// 6-1. 목적지 기준으로 그룹핑
 val dest_by_arrival_groupedDS = us_carrier_df.groupBy($"Dest")
 
-// row 카운팅 (=도착 수)
+// 6-2. row 카운팅 (=도착 수)
 val dest_by_arrival_count_df = dest_by_arrival_groupedDS.count()
 
 dest_by_arrival_count_df.show()
 
-// 내림차순 정렬 메서드
+// 6-3. 내림차순 정렬 메서드
 import org.apache.spark.sql.functions.desc
 
-// 도착 수 기준으로 내림차순 정렬
+// 6-4. 도착 수 기준으로 내림차순 정렬
 dest_by_arrival_count_df.orderBy(desc("count")).show(10)
 // same As
 //dest_by_arrival_count_df.orderBy(-$"count").show(10)
 
-// SQL 문으로 표현
-spark.sql("SELECT Dest, COUNT(*) AS Count 
-	     FROM global_temp.us_carrier 
-	    GROUP BY Dest 
-	    ORDER BY Count DESC LIMIT 10").show()
+// 6-5. SQL 문으로 표현
+spark.sql("""
+  SELECT Dest, COUNT(*) AS Count 
+    FROM global_temp.us_carrier 
+   GROUP BY Dest 
+   ORDER BY Count DESC LIMIT 10
+""").show()
 ```                                                                   
 
 ---
