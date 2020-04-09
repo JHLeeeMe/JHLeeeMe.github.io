@@ -274,6 +274,7 @@ carriers_only_distinct_df.show()
 
 
 import org.apache.spark.sql.functions.col
+import org.apache.spark.sql.functions.{min, max, mean}
 
 // DL 항공만 추출
 us_carrier_df.filter(col("UniqueCarrier") === "DL").show()
