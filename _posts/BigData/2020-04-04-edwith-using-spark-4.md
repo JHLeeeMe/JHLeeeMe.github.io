@@ -121,6 +121,8 @@ resN: Long = 824062
 #!/usr/bin/env scala
 
 
+import org.apache.spark.sql.functions.{min, mean, max}
+
 us_carrier_df.select(min($"distance"), max($"distance"), mean($"distance")).show()
 
 -----------------------------------------------
