@@ -22,34 +22,27 @@ paginate: false
 
 ---
 
-키워드 총집합
+키워드 총집합  
 -- ```SparkSession```  
 -- SparkSession.```read()```  
-
 -- DataFrame.```printSchema()```  
 -- DataFrame.```show()```  
-
 -- DataFrame.```count()```  
-
--- UDF (User Define Function)  
-
 -- DataFrame.```drop()```  
 -- DataFrame.```withColumn()```  
-
--- cache()  
-
 -- DataFrame.```createOfReplaceGlobalTempView()```  
-
--- SparkSession.```sql()```  
--- DataFrame.```select()```  
--- spark.sql.functions.```col()```  
 -- DataFrame.```filter()```  
 -- DataFrame.```distinct()```  
 -- DataFrame.```orderBy()```  
--- spark.sql.functions.```{min, max, mean}```  
--- spark.sql.functions.```desc()```  
+-- DataFrame.```select()```  
 -- DataFrame.```groupBy()```  
 -- DataFrame.```join()```  
+-- DataFrame.```cache()```  
+-- UDF (User Define Function)  
+-- SparkSession.```sql()```  
+-- spark.sql.functions.```col()```  
+-- spark.sql.functions.```{min, max, mean}```  
+-- spark.sql.functions.```desc()```  
 -- spark.sql.functions.```abs()```  
 -- Column.```alias()```
 
@@ -202,8 +195,8 @@ us_carrier_df.createOrReplaceGlobalTempView("<VIEW_NAME>")
 ```
 
 # 8. DataFrame 여러 메서드
--- sql문을 톨한 조회작업을 DataFrame API를 사용해 처리할 수 있다.  
--- 아래 목록들을 sql문과 비교해보자.
+-- ```sql문```을 통한 조회작업을 ```DataFrame API```를 사용해 처리할 수 있다.  
+-- 아래 목록들을 sql문과 비교해보자.  
 -- SparkSession.```sql()```  
 -- 1. DataFrame.```select()```  
 -- 2. DataFrame.```filter()```  
@@ -258,14 +251,13 @@ spark.sql("""
 ```
 
 ## 8-3. join
--- sql문의 ```Join```과 대응
+-- sql문의 ```Join```과 대응  
 -- DataFrame.```join()```  
 ```scala
 // join() 메서드 e.g.
  
 df1.join(df2, Seq("column_name1", ["column_name2", ...]), ["join_type"])
 ```
-
 ### 참고) Join Type
 ```scala
 object JoinType {
@@ -278,7 +270,7 @@ object JoinType {
     case "leftanti" => LeftAnti
     case "cross" => Cross
 ```
--- 사용 예)
+### 사용 예)
 ```scala
 
 // 실제와 예상 비행시간의 차이가 가장 큰 노선은?
@@ -374,8 +366,255 @@ spark.sql("""
 """).show()
 ```
 
+---
+
 ## 강의 링크: [PySpark를 활용한 데이터분석](https://www.edwith.org/sparktutorial)
 edwith의 PySpark를 활용한 데이터분석 강좌의 내용 정리.
 
 ## Spark Doc 한글문서                                                 
 [https://spark-korea.github.io/docs/](https://spark-korea.github.io/docs/)
+
+---
+
+# 전체 Code
+```scala
+#!/usr/bin/env scala
+
+
+import org.apache.spark.sql.SparkSession
+
+val spark = SparkSession
+  .builder()
+  .appName("Spark EDA")
+  .getOrCreate()
+
+// RDD를 DataFrame으로 바꾸는 것과 같은 암시적 변환(implicit conversion)을 처리하기 위해
+import spark.implicits._
+
+val raw_df = spark.read
+  .option("header", "true")
+  .option("inferSchema", "true")
+  .csv("s3a://edwith-pyspark-dataset")
+
+// OR
+// 
+//val raw_df = spark.read
+//  .options(Map("header"-> "true", "inferSchema"-> "true"))
+//  .csv("s3a://edwith-pyspark-dataset")
+
+
+import org.apache.spark.sql.functions.udf
+
+// 'UDFs' 라는 이름의 싱글턴 객체 안에
+// udf로 변환할 메서드들 정의
+object UDFs {
+    def stringToInteger(value: String): Option[Int] = {
+        if ((value.isEmpty) || (value == "NA")) None
+        else Some(value.toInt)
+    }
+
+    def integerToBoolean(value: Int): Boolean ={
+        if (value == 0) false
+        else true
+    }
+}
+
+// udf 변환
+val stringToIntegerFunction = udf(UDFs.stringToInteger _)
+val integerToBooleanFunction = udf(UDFs.integerToBoolean _)
+
+// udf을 활용한 데이터 처리
+val us_carrier_df = raw_df
+    .drop(
+        // 사용하지 않을 column 삭제
+        "DepTime", "CRSDepTime", "ArrTime", "CRSArrTime", "AirTime", "ArrDelay", "DepDelay", "TaxiIn", "TaxiOut",
+        "CancellationCode", "CarrierDelay", "WeatherDelay", "NASDelay", "SecurityDelay", "LateAircraftDelay")
+    .withColumn(
+        // 'NA' to null & Integer type으로 변경
+        "ActualElapsedTime", stringToIntegerFunction(raw_df("ActualElapsedTime")))
+    .withColumn(
+        // 'NA' to null & Integer type으로 변경
+        "CRSElapsedTime", stringToIntegerFunction(raw_df("CRSElapsedTime")))
+    .withColumn(
+        // 'NA' to null & Integer type으로 변경
+        "TailNum", stringToIntegerFunction(raw_df("TailNum")))
+    .withColumn(
+        // 'NA' to null & Integer type으로 변경
+        "Distance", stringToIntegerFunction(raw_df("Distance")))
+    .withColumn(
+        // Boolean type으로 변경
+        "Cancelled", integerToBooleanFunction(raw_df("Cancelled")))
+    .withColumn(
+        // Boolean type으로 변경
+        "Diverted", integerToBooleanFunction(raw_df("Diverted")))
+
+// Schema 확인
+us_carrier_df.printSchema()
+
+// 실제 데이터 확인
+us_carrier_df.show()
+
+// 캐싱
+us_carrier_df.cache()
+
+// 전역 임시 뷰 생성                                                  
+us_carrier_df.createOrReplaceGlobalTempView("us_carrier")
+
+// SQL문으로 조회
+spark.sql("SELECT * FROM global_temp.us_carrier LIMIT 10")
+
+
+// 'UniqueCarrier' column만을 가지는 DataFrame
+val carriers_only_df = us_carrier_df.select("UniqueCarrier")
+
+// distinct() 메서드를 이용한 유니크 값 추출 (시간 소요가 조금 있다.)
+val carriers_only_distinct_df = carriers_only_df.distinct()
+// same as
+// spark.sql("SELECT DISTINCT UniqueCarrier FROM global_temp.us_carrier").show()
+
+carriers_only_distinct_df.show()
+
+
+import org.apache.spark.sql.functions.col
+import org.apache.spark.sql.functions.{min, max, mean}
+
+// DL 항공만 추출
+us_carrier_df.filter(col("UniqueCarrier") === "DL").show()
+// same As
+// us_carrier_df.filter($"UniqueCarrier" === "DL").show()
+
+// 1990년도 데이터만 추출
+us_carrier_df.filter(col("Year") === 1990).show()
+// same As
+// us_carrier_df.filter($"UniqueCarrier" === "DL").show()
+
+// 위 두 명령을 합쳐보자.
+// us_carrier_df.filter(col("UniqueCarrier") === "DL").filter(col("Year") === 1990).show()
+us_carrier_df.filter((col("UniqueCarrier") === "DL") && (col("Year") === 1990).show()
+// same As
+// us_carrier_df.filter(($"UniqueCarrier" === "DL") && ($"Year" === 1990)).show()
+
+// SQL문으로 작성시
+spark.sql("""
+  SELECT * 
+    FROM global_temp.us_carrier 
+   WHERE UniqueCarrier == 'DL' AND Year == 1990
+""").show()
+
+// DL항공의 1990년도 운항 횟수
+us_carrier_df.filter(($"UniqueCarrier" === "DL") && ($"Year") === 1990).count()
+
+// 운항거리 최소, 최대, 평균
+us_carrier_df.select(min($"distance"), max($"distance"), mean($"distance")).show()
+
+// 운항거리가 0(최소)인 데이터 조회
+us_carrier_df.filter($"distance" === 0).show()
+
+// 운항거리가 4983(최대)인 데이터 조회
+us_carrier_df.filter($"distance" === 4983).show()
+
+// DataFrame.describe() 메서드로 한번에 알아보자.
+us_carrier_df.describe("distance").show()
+
+
+val us_carrier_1987_df = us_carrier_df.filter($"Year" === 1987).select($"Origin", $"Dest")
+val us_carrier_1993_df = us_carrier_df.filter($"Year" === 1993).select($"Origin", $"Dest")
+
+// 중복값 제거
+val us_carrier_1987_distinct_ds = us_carrier_1987_df.distinct()
+val us_carrier_1993_distinct_ds = us_carrier_1993_df.distinct()
+
+// 정렬 후 출력
+us_carrier_1987_distinct_ds.orderBy($"Origin", $"Dest").show()
+us_carrier_1993_distinct_ds.orderBy($"Origin", $"Dest").show()
+
+us_carrier_1987_distinct_ds.count()
+us_carrier_1993_distinct_ds.count()
+
+// SQL 문으로 표현
+// 1987년도
+spark.sql("""
+  SELECT COUNT(DISTINCT(Origin, Dest)) AS Count 
+    FROM global_temp.us_carrier 
+   WHERE Year = 1987
+""").show()
+
+// 1993년도
+spark.sql("""
+  SELECT COUNT(DISTINCT(Origin, Dest)) AS COUNT 
+    FROM global_temp.us_carrier 
+   WHERE Year = 1993
+""").show()
+
+
+// 6. 가장 바쁜 공항 TOP10
+// 6-1. 목적지 기준으로 그룹핑
+val dest_by_arrival_groupedDS = us_carrier_df.groupBy($"Dest")
+
+// 6-2. row 카운팅 (=도착 수)
+val dest_by_arrival_count_df = dest_by_arrival_groupedDS.count()
+
+dest_by_arrival_count_df.show()
+
+// 6-3. 내림차순 정렬 메서드
+import org.apache.spark.sql.functions.desc
+
+// 6-4. 도착 수 기준으로 내림차순 정렬
+dest_by_arrival_count_df.orderBy(desc("count")).show(10)
+// same As
+//dest_by_arrival_count_df.orderBy(-$"count").show(10)
+
+// 6-5. SQL 문으로 표현
+spark.sql("""
+  SELECT Dest, COUNT(*) AS Count 
+    FROM global_temp.us_carrier 
+   GROUP BY Dest 
+   ORDER BY Count DESC LIMIT 10
+""").show()
+
+
+// 7. 실제와 예상 비행시간의 차이가 가장 큰 노선은?
+// 7-1. 그룹핑으로 노선 데이터셋 추출
+val origin_dest_groupedDS = us_carrier_df.groupBy($"Origin", $"Dest")
+
+// 7-2. 실제 비행시간 평균 계산
+val actual_elapsed_df = origin_dest_groupedDS.mean("ActualElapsedTime")
+
+actual_elapsed_df.show()
+
+// 7-3. 예상 비행시간 구하기
+val expected_elapsed_df = origin_dest_groupedDS.min("CRSElapsedTime")
+
+expected_elapsed_df.show()
+
+// 7-4. 두 데이터 합치기 (Join)
+val left_outer_joined_df = actual_elapsed_df
+  .join(expected_elapsed_df, Seq("Origin", "Dest"), "left_outer")
+    
+left_outer_joined_df.show()
+
+// 7-5. 실제와 예상 비행시간의 차이를 구하기
+import org.apache.spark.sql.functions.abs
+
+val difference_df = left_outer_joined_df.select($"Origin", $"Dest", abs($"avg(ActualElapsedTime)" - $"min(CRSElapsedTime)")
+
+difference_df.show()
+
+// 7-6. 결과값 정렬
+difference_df
+  .select($"Origin", $"Dest", $"abs((avg(ActualElapsedTime) - min(CRSElapsedTime)))".alias("difference"))
+  .orderBy(desc("difference"))
+  .show()
+
+// 7-7. SQL문으로 표현
+// Global Temp View 생성
+actual_elapsed_df.createOrReplaceGlobalTempView("actual_elapsed")
+expected_elapsed_df.createOrReplaceGlobalTempView("expected_elapsed")
+
+spark.sql("""
+  SELECT a.Origin, a.Dest, abs(a.`avg(ActualElapsedTime)` - e.`min(CRSElapsedTime)`) AS difference 
+    FROM global_temp.actual_elapsed AS a LEFT OUTER JOIN global_temp.expected_elapsed AS e 
+      ON a.Origin = e.Origin AND a.Dest = e.Dest 
+   ORDER BY difference DESC
+""").show()
+```
