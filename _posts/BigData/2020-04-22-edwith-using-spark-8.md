@@ -207,10 +207,10 @@ us_carrier_df.createOrReplaceGlobalTempView("<VIEW_NAME>")
 -- SparkSession.```sql()```  
 -- 1. DataFrame.```select()```  
 -- 2. DataFrame.```filter()```  
--- 3. DataFrame.```distinct()```  
--- 4. DataFrame.```orderBy()```  
--- 5. DataFrame.```groupBy()```  
--- 6. DataFrame.```join()```  
+-- 3. DataFrame.```join()```  
+-- 4. DataFrame.```distinct()```  
+-- 5. DataFrame.```orderBy()```  
+-- 6. DataFrame.```groupBy()```  
 -- spark.sql.functions.```col()```  
 -- spark.sql.functions.```abs()```  
 -- spark.sql.functions.```{min, max, mean}```  
@@ -241,6 +241,7 @@ spark.sql("""
 -- spark.sql.functions.```col()```  
 ㄴ> 칼럼 지정 메서드(scala에선 ```$"<columnName>"```으로 표현 가능)  
 -- sql문의 ```WHERE```절
+```scala
 import org.apache.spark.sql.functions.col
 
 // DL 항공만 추출
@@ -254,7 +255,74 @@ spark.sql("""
     FROM global_temp.us_carrier 
    WHERE UniqueCarrier == 'DL' AND Year == 1990
 """).show()
----
+```
+
+## 8-3. join
+-- sql문의 ```Join```과 대응
+-- DataFrame.```join()```  
+```scala
+// join() 메서드 e.g.
+ 
+df1.join(df2, Seq("column_name1", ["column_name2", ...]), ["join_type"])
+```
+
+### 참고) Join Type
+```scala
+object JoinType {
+  def apply(typ: String): JoinType = typ.toLowerCase(Locale.ROOT).replace("_", "") match {
+    case "inner" => Inner
+    case "outer" | "full" | "fullouter" => FullOuter
+    case "leftouter" | "left" => LeftOuter
+    case "rightouter" | "right" => RightOuter
+    case "leftsemi" => LeftSemi
+    case "leftanti" => LeftAnti
+    case "cross" => Cross
+```
+-- 사용 예)
+```scala
+
+// 실제와 예상 비행시간의 차이가 가장 큰 노선은?
+// 그룹핑으로 노선 데이터셋 추출
+val origin_dest_groupedDS = us_carrier_df.groupBy($"Origin", $"Dest")
+
+// 실제 비행시간 평균 계산
+val actual_elapsed_df = origin_dest_groupedDS.mean("ActualElapsedTime")
+
+// 예상 비행시간 구하기
+val expected_elapsed_df = origin_dest_groupedDS.min("CRSElapsedTime")
+
+// 두 데이터 합치기 (Join)
+val left_outer_joined_df = actual_elapsed_df
+  .join(expected_elapsed_df, Seq("Origin", "Dest"), "left_outer")
+    
+left_outer_joined_df.show()
+
+// 실제와 예상 비행시간의 차이를 구하기
+import org.apache.spark.sql.functions.abs
+
+val difference_df = left_outer_joined_df.select($"Origin", $"Dest", abs($"avg(ActualElapsedTime)" - $"min(CRSElapsedTime)")
+
+difference_df.show()
+
+// 결과값 정렬
+difference_df
+  .select($"Origin", $"Dest", $"abs((avg(ActualElapsedTime) - min(CRSElapsedTime)))".alias("difference"))
+  .orderBy(desc("difference"))
+  .show()
+
+// SQL문으로 표현
+// Global Temp View 생성
+actual_elapsed_df.createOrReplaceGlobalTempView("actual_elapsed")
+expected_elapsed_df.createOrReplaceGlobalTempView("expected_elapsed")
+
+spark.sql("""
+  SELECT a.Origin, a.Dest, abs(a.`avg(ActualElapsedTime)` - e.`min(CRSElapsedTime)`) AS difference 
+    FROM global_temp.actual_elapsed AS a LEFT OUTER JOIN global_temp.expected_elapsed AS e 
+      ON a.Origin = e.Origin AND a.Dest = e.Dest 
+   ORDER BY difference DESC
+""").show()
+```
+
 
 ### 나머지는 코드로만
 ```scala
