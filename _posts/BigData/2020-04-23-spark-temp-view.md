@@ -50,8 +50,8 @@ spark.sql("SELECT column_name1, column_name2 FROM df_view").show()
 그 다음 ```~TempView()```와 ```~GlobalTempView()```를 살펴보자.
 
 ### 2-1. 일단 TempView
--- Local Temporary View
--- Session Scope, (i.e. 세션이 종료되면 drop된다.)  
+-- Local Temporary View  
+-- ```Session Scope```, (i.e. 세션이 종료되면 drop된다.)  
 -- 아래는 TempView 생성 예
 ```scala
 df.createTempView("df_view")
@@ -62,7 +62,7 @@ spark.sql("SELECT * FROM df_view")
 
 ### 2-2. GlobalTempView
 -- Global Temporary View  
--- Cross-Session, (i.e. 세션간 공유, spark 어플리케이션이 종료되면 drop)  
+-- ```Cross-Session```, (i.e. 세션간 공유, spark 어플리케이션이 종료되면 drop)  
 -- 아래는 GlobalTempView 생성 예
 ```scala
 df.createGlobalTempView("df_globalView")
@@ -70,7 +70,7 @@ df.createOrReplaceGlobalTempView("df_globalView")
 
 spark.sql("SELECT * FROM global_temp.df_globalView")
 ```
-```GlobalTempView```는 시스템의 임시 디비로 연결되므로(ex. Master Node의 하드디스크)  
+```GlobalTempView```는 시스템의 임시 디비로 연결되므로(e.g. Master Node의 하드디스크)  
 접근할때 ```global_temp```로 접근
 
 ## 3. Temp View 삭제 메서드
