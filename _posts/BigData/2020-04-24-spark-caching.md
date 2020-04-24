@@ -39,7 +39,7 @@ res0: org.apache.spark.storage.StorageLevel = StorageLevel(disk, memory, deseria
 ```
 
 ## 2. persist()
--- persist()메서드는 스토리지 레벨을 인자로 받아 저장 공간을 정할 수 있다.  
+-- ```persist()```메서드는 스토리지 레벨을 인자로 받아 저장 공간을 정할 수 있다.  
 ```scala
 scala> val test2 = Seq(1, 2, 3)
 scala> val test2_df = test2.toDF()
