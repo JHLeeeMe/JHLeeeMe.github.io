@@ -139,10 +139,149 @@ res10: org.apache.spark.storage.StorageLevel = StorageLevel(1 replicas)
 
 ---
 
+# 추가) Temp View 캐싱에 관하여
+Spark에서 sql문으로 작업을 하기 위해 Temp View를 생성한다.  
+Temp View도 캐싱이 가능하다.  
+이전에 [Temp View 관련 글](https://jhleeeme.github.io/spark-temp-view/#3-temp-view-%EC%82%AD%EC%A0%9C-%EB%A9%94%EC%84%9C%EB%93%9C)에서 Temp View 삭제 메서드를 쓸 때  
+```spark.catalog.dropTempView()```메서드를 사용했다.  
+그렇다. Temp View나 Table등을 관리하는 메서드들은 ```spark.catalog```에 모아져있다.  
+```spark.catalog```를 살펴보자.
+
+## Catalog
+![spark_catalog](https://user-images.githubusercontent.com/31606119/80333807-3e482000-888a-11ea-9207-05e321e27b4a.png)
+여러 메서드들 중에 간단히 몇가지만 살펴보겠다. 자세한 내용은 [여기](https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.sql.catalog.Catalog)  
+-- ```cacheTable, uncacheTable``` : View 캐싱, 언캐싱  
+-- ```dropTempView, dropGlobalTempView``` : Drop View & Global View  
+-- ```isCached``` : 캐싱 상태확인  
+-- ```clearCache``` : 모든 View 언캐싱  
+-- ```tableExists``` : View 존재확인  
+위 메서드들 말고도 테이블이나 칼럼의 리스트를 본다거나 존재여부 등을 체크하는 메서드들이 있다.
+
+아래는 간단한 DF의 TempView를 만들어서 캐싱 해보았다.
+```scala
+// DF 생성
+scala> val test1_df = Seq(1, 2, 3).toDF()
+
+// View 생성
+scala> test1_df.createTempView("test1_tempView")
+
+// DF & Temp View 스토리지 레벨 체크
+scala> test1_df.storageLevel
+scala> spark.catalog.isCached("test1_tempView")
+resN: org.apache.spark.storage.StorageLevel = StorageLevel(1 replicas)
+resN: Boolean = false
+
+// Temp View Caching
+scala> spark.catalog.cacheTable("test1_tempView")
+
+// DF & Temp View 스토리지 레벨 체크
+scala> test1_df.storageLevel
+scala> spark.catalog.isCached("test1_tempView")
+resN: org.apache.spark.storage.StorageLevel = StorageLevel(disk, memory, deserialized, 1 replicas)
+resN: Boolean = true
+```
+위 코드에서 뭔가 이상한게 하나있다.  
+```Temp View```만 캐싱했는데 ```DF```까지 캐싱이 되었다.  
+DF와 그 DF로 생성한 View, Table 등은 ```스토리지 레벨을 공유한다.```  
+즉, 위 코드에서 DF나 TempView를 언캐싱하면 둘 다 언캐싱 된다는 소리다.  
+아래 코드는 위 코드의 ```test1_tempView```를 언캐싱해보겠다.
+```scala
+#!/usr/bin/env spark-shell
+// DF 언캐싱
+scala> spark.catalog.uncacheTable("test1_tempView")
+
+// DF & Temp View 스토리지 레벨 체크
+scala> test1_df.storageLevel
+scala> spark.catalog.isCached("test1_tempView")
+resN: org.apache.spark.storage.StorageLevel = StorageLevel(1 replicas)
+resN: Boolean = false
+```
+예상대로이다.  
+```test1_df.unpersist()```를 (또는 ```spark.catalog.clearCache()```) 실행해도 결과는 마찬가지  
+그렇다면 기존 DF가 캐싱이 된 상태에서 View를 생성한다면?  
+View와 DF는 스토리지 레벨을 공유하므로 생성된 View도 캐싱이 자동으로 될것이다.  
+확인해보자.
+```scala
+// DF 캐싱 상태 확인
+scala> test1_df.storageLevel
+resN: org.apache.spark.storage.StorageLevel = StorageLevel(1 replicas)
+
+// DF 캐싱
+scala> test1_df.cache()
+resN: test1_df.type = [value: int]
+
+// View 생성
+scala> test1_df.createTempView("abc")
+
+// View 캐싱 상태 확인
+scala> spark.catalog.isCached("abc")
+resN: Boolean = true
+```
+예상대로이다.  
+그렇다면 또 다른 궁금증.  
+현재 View가 ```test1_tempView```와 ```abc```가 있는데 여기서 하나의 View를 언캐싱 한다면??  
+두 View 모두 같은 ```test1_df```로 만들어졌으므로 하나의 View를 언캐싱하면 DF도 언캐싱되고  
+그것과 스토리지레벨을 공유하는 또다른 View도 언캐싱될것으로 예상된다. 살펴보자.
+```scala
+scala> spark.catalog.listTables().show()
++--------------+--------+-----------+---------+-----------+
+|          name|database|description|tableType|isTemporary|
++--------------+--------+-----------+---------+-----------+
+|test1_tempview|    null|       null|TEMPORARY|       true|
+|           abc|    null|       null|TEMPORARY|       true|
++--------------+--------+-----------+---------+-----------+
+
+// DF & Views 스토리지 레벨 체크
+scala> test1_df.storageLevel
+scala> spark.catalog.isCached("test1_tempView")
+scala> spark.catalog.isCached("abc")
+resN: org.apache.spark.storage.StorageLevel = StorageLevel(disk, memory, deserialized, 1 replicas)
+resN: Boolean = true
+resN: Boolean = true
+
+// 하나의 View 언캐싱
+scala> spark.catalog.uncacheTable("abc")
+
+// DF & Views 스토리지 레벨 체크
+scala> test1_df.storageLevel
+scala> spark.catalog.isCached("test1_tempView")
+scala> spark.catalog.isCached("abc")
+resN: org.apache.spark.storage.StorageLevel = StorageLevel(1 replicas)
+resN: Boolean = false
+resN: Boolean = false
+```
+예상대로이다.
+
+이번엔 View를 Drop해보자.  
+```scala
+// View 존재 확인
+scala> spark.catalog.tableExists("test1_tempView")
+resN: Boolean = true
+
+// Drop View
+scala> spark.catalog.dropTempView("test1_tempView")
+resN: Boolean = true
+
+// View 존재 확인
+scala> spark.catalog.tableExists("test1_tempView")
+resN: Boolean = false
+
+scala> spark.catalog.listTables().show()
++--------------+--------+-----------+---------+-----------+
+|          name|database|description|tableType|isTemporary|
++--------------+--------+-----------+---------+-----------+
+|           abc|    null|       null|TEMPORARY|       true|
++--------------+--------+-----------+---------+-----------+
+```
+
+---
+
 # 참고자료
 
 링크: [databricks Cache()](https://databricks-prod-cloudfront.cloud.databricks.com/public/4027ec902e239c93eaaa8714f173bcfc/5211178207246023/950505630032626/7788830288800223/latest.html)  
 
 Spark docs: [object StorageLevel](https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.storage.StorageLevel$@MEMORY_ONLY_2:org.apache.spark.storage.StorageLevel)
+
+Spark docs: [abstract class Catalog](https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.sql.catalog.Catalog)
 
 Blog: [조대협님의 블로그 글](https://bcho.tistory.com/1029)
