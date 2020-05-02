@@ -4,8 +4,8 @@ layout: post
 title: "Grafana에서 Alert 설정하기 (Email 알림)"
 subtitle:
 description:
-image:
-optimized_image:
+image: https://user-images.githubusercontent.com/31606119/80873481-c21f6380-8cf3-11ea-8bed-bee3cd8763e0.png
+optimized_image: https://user-images.githubusercontent.com/31606119/80873481-c21f6380-8cf3-11ea-8bed-bee3cd8763e0.png
 category: ETC
 tags: 
   - ETC
