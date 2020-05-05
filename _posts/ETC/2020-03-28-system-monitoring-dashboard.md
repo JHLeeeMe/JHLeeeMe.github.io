@@ -208,3 +208,8 @@ Host PC에서 접속하기 위해 방화벽에서 3000번 포트를 뚫어주었
 disk는 fluent-bit 기본값으로 read, write 두 개로 돼있나 보다.  
 생각했던 건 사용 중인 용량하고 전체 용량이었는데...  
 그게 중요한 건 아니라 따로 알아보진 않았다.
+
+---
+
+# 추가) Grafana 알림 설정하기
+내 글: [Grafana에서 Alert 설정하기 (Email 알림)](https://jhleeeme.github.io/alerting-grafana/)
