@@ -8,7 +8,9 @@ image: https://user-images.githubusercontent.com/31606119/77818265-6cfc9a80-7114
 optimized_image: https://user-images.githubusercontent.com/31606119/77818265-6cfc9a80-7114-11ea-91b7-e9fcb0e0ab98.png
 category: ETC
 tags:
-  - ETC
+  - ETC  
+  - Grafana
+  - InfluxDB
 author: JHLeeeMe
 paginate: false
 ---
