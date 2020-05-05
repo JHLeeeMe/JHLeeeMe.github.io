@@ -213,5 +213,10 @@ disk는 fluent-bit 기본값으로 read, write 두 개로 돼있나 보다.
 
 ---
 
-# 추가) Grafana 알림 설정하기
+# 추가) 
+## Grafana 알림 설정하기
 내 글: [Grafana에서 Alert 설정하기 (Email 알림)](https://jhleeeme.github.io/alerting-grafana/)
+
+## InfluxDB Retention Policy 적용하기
+-- 위 글대로 환경 구성을하면 반드시 느려질 것이다. 데이터가 계속 쌓이기 때문인데 그 문제를 해결하는 방법이다.  
+내 글: [[InfluxDB] Retention Policy란? & 설정 방법](https://jhleeeme.github.io/influxdb-retention-policy/)
