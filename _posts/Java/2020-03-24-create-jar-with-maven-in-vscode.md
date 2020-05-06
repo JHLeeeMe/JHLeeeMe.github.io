@@ -9,7 +9,6 @@ optimized_image: https://user-images.githubusercontent.com/31606119/77388393-520
 category: Java
 tags:
   - Java
-  - jar
   - maven
 author: JHLeeeMe
 paginate: false
