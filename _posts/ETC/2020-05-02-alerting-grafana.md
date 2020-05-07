@@ -29,6 +29,7 @@ Grafana: v6.7.3
 ---
 
 ## 1. 보안 수준이 낮은 앱의 엑세스 ON
+-- [https://myaccount.google.com/lesssecureapps](https://myaccount.google.com/lesssecureapps)  
 외부에서의 연결을 허용해야 하므로 아래 사진처럼 설정을 ON으로 바꿔준다.
 ![google_access](https://user-images.githubusercontent.com/31606119/80871513-0442a800-8ce8-11ea-80e8-72bab88dd3dc.jpg)
 
@@ -68,6 +69,7 @@ $ echo 'test' |ssmtp <user>@gmail.com
 <a href="https://user-images.githubusercontent.com/31606119/80872189-520cdf80-8ceb-11ea-9af4-38a64c985155.png">
 ![0](https://user-images.githubusercontent.com/31606119/80872189-520cdf80-8ceb-11ea-9af4-38a64c985155.png)
 </a>
+마찬가지로 앱 비밀번호가 있다면 그것으로 써넣자.
 
 -- 3-3. grafana-server 재시작  
 ```$ sudo service grafana-server restart```
