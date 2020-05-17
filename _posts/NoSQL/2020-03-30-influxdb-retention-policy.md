@@ -55,7 +55,7 @@ mongoDB의 capped collection(limited size collection)과 같은 것이 없을까
 
 그러면 이제 database를 default로 생성 & retention policies를 보자.
 ```bash
-$ Influx
+$ influx
   > create database test
   > use test
   > show retention policies
@@ -93,7 +93,7 @@ ALTER RETENTION POLICY "policy_name" ON "db_name" retention_policy_option
 -- 그러므로 ```duration``` 을 1주일 이상으로 설정하던지, ```shardGroupDuration``` 을 낮추던지 해야 함  
 -- 아래 코드는 후자이다.
 ```sql
-$ Influx
+$ influx
   > ALTER RETENTION POLICY "autogen" ON "test" DURATION 2h SHARD DURATION 1h
 ```
 ![3](https://user-images.githubusercontent.com/31606119/77889270-92baa880-72a8-11ea-97ba-a312d2af8a0a.png)
