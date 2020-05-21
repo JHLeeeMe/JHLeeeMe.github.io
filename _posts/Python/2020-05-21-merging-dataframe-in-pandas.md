@@ -1,11 +1,11 @@
 ---
 date: 2020-05-21 12:24:31
 layout: post
-title: "[Pandas] DataFrame 병합 메서드(pd.concat(), pd.merge())"
+title: "[Pandas] DataFrame 병합 메서드(concat(), merge())"
 subtitle:
 description:
-image: https://user-images.githubusercontent.com/31606119/82564352-96d1bb00-9bb3-11ea-804a-046a52a43652.png
-optimized_image: https://user-images.githubusercontent.com/31606119/82564352-96d1bb00-9bb3-11ea-804a-046a52a43652.png
+image: https://user-images.githubusercontent.com/31606119/82567334-309b6700-9bb8-11ea-900f-b104f9248807.png
+optimized_image: https://user-images.githubusercontent.com/31606119/82567334-309b6700-9bb8-11ea-900f-b104f9248807.png
 category: Python
 tags: 
   - Python
@@ -13,7 +13,7 @@ tags:
 author: JHLeeeMe
 paginate: false
 ---
-![pandas_merging](https://user-images.githubusercontent.com/31606119/82564352-96d1bb00-9bb3-11ea-804a-046a52a43652.png)
+![pandas-merging](https://user-images.githubusercontent.com/31606119/82567334-309b6700-9bb8-11ea-900f-b104f9248807.png)
 
 # DataFrame 병합하기
 -- 1. pd.concat()  
