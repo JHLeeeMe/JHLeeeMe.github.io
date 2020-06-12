@@ -86,6 +86,9 @@ spark.catalog.dropGlobalTempView("df_globalView")
 
 다음엔 캐싱에 관한 이야기를 좀 해보고자 한다. ㅎ
 
+다음 글)  
+내 글: [cache()와 persist()의 차이](https://jhleeeme.github.io/spark-caching/)
+
 ---
 
 # 참고자료
