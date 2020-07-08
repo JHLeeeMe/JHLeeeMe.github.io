@@ -1,7 +1,7 @@
 ---
 date: 2020-07-08 13:23:35
 layout: post
-title: "Selenium에서 스크롤링 하는 법"
+title: "Selenium에서 스크롤링 하기"
 subtitle:
 description:
 image: https://user-images.githubusercontent.com/31606119/86946876-f8f77700-c185-11ea-9ada-64ecb63e99eb.png
