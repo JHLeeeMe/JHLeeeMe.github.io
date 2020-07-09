@@ -83,14 +83,14 @@ val tables = spark.catalog.listTables()
 -- SparkSession.```read()```
 ```scala
 val df = spark.read.json("<path>")
-//save As
+//same As
 //val df = spark.read.format("json").load("<path>")
 
 val df2 = spark.read
   .option("header", "true")
   .option("inferSchema", "true")
   .csv("<path>")
-//save As
+//same As
 //val df2 = spark.read
 //  .options(Map("header" -> "true", "inferSchema" -> "true"))
 //  .csv("<path>")
