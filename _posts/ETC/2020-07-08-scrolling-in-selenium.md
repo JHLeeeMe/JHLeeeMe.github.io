@@ -67,7 +67,7 @@ Output:
 {'y': 1, 'x': 360}
 ```
 위 코드중에 driver.```find_element_by_css_selector()```메서드는  
-element를 return 해주는데 파라미터 값을 쉽게 취하는 방법은 아래와 같다.  
+element를 return 해주며, 파라미터 값을 쉽게 취하는 방법은 아래와 같다.  
 크롬이라면 ```Ctrl + Shift + c```를 누르고 해당 요소를 마우스로 크릭하면 바로 잡힘
 <a href="https://user-images.githubusercontent.com/31606119/86931040-9c3e9100-c172-11ea-8ff8-e220277a4bf9.png">
 ![brunch_copy_selector](https://user-images.githubusercontent.com/31606119/86931040-9c3e9100-c172-11ea-8ff8-e220277a4bf9.png)
