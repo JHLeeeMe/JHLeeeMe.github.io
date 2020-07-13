@@ -15,7 +15,7 @@ paginate: false
 ---
 
 최근에 토이 프로젝트를 하나 완성시켰다.  
-하루에 한번씩 23시에 brunch의 오늘 올라온 글들을 스크래핑 해서  
+하루에 한번씩 23시 50분에 brunch의 오늘 올라온 글들을 스크래핑 해서  
 github의 Issues로 등록해주는 자동화 프로젝트이다.  
 [https://github.com/JHLeeeMe/todays-brunch](https://github.com/JHLeeeMe/todays-brunch)  
 
