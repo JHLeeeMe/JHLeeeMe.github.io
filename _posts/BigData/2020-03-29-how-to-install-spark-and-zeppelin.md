@@ -6,9 +6,9 @@ subtitle:
 description:
 image: https://user-images.githubusercontent.com/31606119/77845481-3ee98a00-71ea-11ea-8f3e-ead4bc957564.png
 optimized_image: https://user-images.githubusercontent.com/31606119/77845481-3ee98a00-71ea-11ea-8f3e-ead4bc957564.png
-category: ETC
+category: BigData
 tags:
-  - ETC
+  - BigData
   - Spark
   - Zeppelin
 author: JHLeeeMe
