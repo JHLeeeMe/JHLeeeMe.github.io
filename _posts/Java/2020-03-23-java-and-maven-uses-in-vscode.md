@@ -110,7 +110,6 @@ Java Extension Pack을 설치하자.
 <a href='https://user-images.githubusercontent.com/31606119/77272599-f23b1600-6cf4-11ea-8826-38610d4966f7.png'>
 ![10](https://user-images.githubusercontent.com/31606119/77272599-f23b1600-6cf4-11ea-8826-38610d4966f7.png)
 </a>
-![10](https://user-images.githubusercontent.com/31606119/77272599-f23b1600-6cf4-11ea-8826-38610d4966f7.png)
 
 그러면 아래 사진처럼 archetype을 고르라는 창이 뜰 것이다. maven-archetype-quickstart를 눌러보자.
 <a href='https://user-images.githubusercontent.com/31606119/77272601-f2d3ac80-6cf4-11ea-941a-64954e654b59.png'>
