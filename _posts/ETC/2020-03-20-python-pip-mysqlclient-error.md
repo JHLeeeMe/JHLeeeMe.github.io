@@ -15,12 +15,12 @@ author: JHLeeeMe
 paginate: false
 ---
 
-Ubuntu18.04 환경에서  
+Ubuntu18.04++ 환경에서  
 pip install mysqlclient 에러
 
-## 1. install ```libmysqlclient-dev```, ```gcc```
+## 1. install dependencies package
 ```bash
-$ sudo apt install 
+$ sudo apt install libmysqlclient-dev gcc
 ```
 
 ## 2. 다시 pip install
