@@ -20,7 +20,7 @@ github의 Issues로 등록해주는 자동화 프로젝트이다.
 [https://github.com/JHLeeeMe/todays-brunch](https://github.com/JHLeeeMe/todays-brunch)  
 
 처음엔 ```requests``` + ```BeautifulSoup```으로 간단하게 할려고 했는데,  
-동적 페이지라 원하는 정보를 원하는데로 못긁어서   
+동적 페이지라 정보를 원하는데로 못긁어서   
 ```Selenium``` + ```BeautifulSoup```의 조합으로 작업을 완성시켰다.  
 
 brunch의 글들은 스크롤을 내리면 글이 계속 나온다.(무한 스크롤)  
@@ -68,7 +68,7 @@ Output:
 ```
 위 코드중에 driver.```find_element_by_css_selector()```메서드는  
 element를 return 해주며, 파라미터 값을 쉽게 취하는 방법은 아래와 같다.  
-크롬이라면 ```Ctrl + Shift + c```를 누르고 해당 요소를 마우스로 크릭하면 바로 잡힘
+크롬이라면 ```Ctrl + Shift + C```를 누르고 해당 요소를 마우스로 클릭하면 바로 잡힘
 <a href="https://user-images.githubusercontent.com/31606119/86931040-9c3e9100-c172-11ea-8ff8-e220277a4bf9.png">
 ![brunch_copy_selector](https://user-images.githubusercontent.com/31606119/86931040-9c3e9100-c172-11ea-8ff8-e220277a4bf9.png)
 </a>
