@@ -123,7 +123,7 @@ doc v1.7: [https://docs.influxdata.com/influxdb/v1.7/](https://docs.influxdata.c
 ```bash
 #!/usr/bin/env bash
 
-#influxdb start
+# influxdb start
 $ sudo service influxdb start
 
 # influxdb admin으로 접속
@@ -134,7 +134,7 @@ $ influx
 ```
 
 ## 3. grafana로 dashboard 생성
--- 설치는 doc 참조
+-- 설치는 doc 참조  
 주소: [https://grafana.com/docs/grafana/latest/installation/debian/](https://grafana.com/docs/grafana/latest/installation/debian/)
 
 -- 먼저 fluent-bit를 실행해서 influxdb에 system-metrics를 적재하자.  
@@ -146,8 +146,8 @@ $ influx
 -- grafana 접속
 ```ruby
 웹 브라우저를 켜고 localhost:3000에 접속해보자. (default-port: 3000)
-user: admin
-password: admin
+init-user: admin
+init-password: admin
 ```
 <a href="https://user-images.githubusercontent.com/31606119/77818257-679f5000-7114-11ea-89ff-97a95b2bba7a.png">
 ![0](https://user-images.githubusercontent.com/31606119/77818257-679f5000-7114-11ea-89ff-97a95b2bba7a.png)
