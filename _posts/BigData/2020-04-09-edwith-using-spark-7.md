@@ -341,6 +341,9 @@ only showing top 20 rows
 대체로 공항 간의 거리가 멀수록, 공항이 붐빌수록 차이가 심하게 나는 것 같다.  
 이 부분에 대한 검증은 생략
 
+다음 강의에선 여태까지 써왔던 메서드들을 총정리하겠다.
+### 다음 강의: [8. 메서드 총정리](https://jhleeeme.github.io/edwith-using-spark-8/)
+
 ---
 
 ## 전체 Code
