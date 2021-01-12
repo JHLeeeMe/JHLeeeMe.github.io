@@ -159,7 +159,8 @@ resN+1: Long = 3425
 spark.sql("""
   SELECT COUNT(DISTINCT(Origin, Dest)) AS Count 
     FROM global_temp.us_carrier 
-   WHERE Year = 1987").show()
+   WHERE Year = 1987
+""").show()
 
 // 1993년도
 spark.sql("""
