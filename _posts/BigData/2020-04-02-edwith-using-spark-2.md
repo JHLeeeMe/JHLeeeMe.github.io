@@ -26,7 +26,7 @@ PySpark이 아닌 Scala Spark으로 진행
 -- ```데이터 전처리```  
 -- ```UDF(User Define Function)```  
 -- DataFrame.```drop()```  
--- DataFrame.```withcolumn()```  
+-- DataFrame.```withColumn()```  
 -- Temp View 생성 (for SparkSession.```sql()```)  
 -- ```cache()```
 
