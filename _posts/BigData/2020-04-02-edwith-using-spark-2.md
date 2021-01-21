@@ -60,7 +60,7 @@ object UDFs {
         else Some(value.toInt)
     }
     
-    def integerToBoolean(value: Int): Boolean ={
+    def integerToBoolean(value: Int): Boolean = {
         if (value == 0) false 
         else true
     }
