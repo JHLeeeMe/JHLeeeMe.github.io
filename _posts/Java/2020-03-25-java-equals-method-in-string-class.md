@@ -61,30 +61,22 @@ public class JavaStringPool {
 ---
 
 ## '=='연산자와 equals()의 차이
-호출엔 두 종류가 있다.
-1. CBV(Call By Value), 값에 의한 호출  
-=> ```primitive type``` (int, float, byte 등...)
-2. CBR(Call By Reference), 참조 의한 호출  
-=> ```reference type``` (Array, class 등...)
 
-문자열은 ```reference type```이다.  
-데이터의 주솟값을 참조해서 호출한다는 말이다.  
 그리고 ```'=='``` 연산자는 주솟값을, ```equals()``` 메서드는 주소에 들어있는 데이터를 비교한다.  
 그런데 위에서 봤듯이 문자열은 ```String Pool```이란 개념이 있어 데이터가 같아도 주소가 다를 수 있다.  
 아래 코드를 보자.
 ```java
 public class Test {
-
     public static void main(String[] args) {
         String s1 = "Hello";
         String s2 = "Hello";
         String s3 = new String("Hi");
         String s4 = "Hi";
         
-        System.out.println("s1의 주솟값: " + System.identityHashCode(s1));
-        System.out.println("s2의 주솟값: " + System.identityHashCode(s2));
-        System.out.println("s3의 주솟값: " + System.identityHashCode(s3));
-        System.out.println("s4의 주솟값: " + System.identityHashCode(s4));
+        System.out.println("s1의 hashCode: " + System.identityHashCode(s1));
+        System.out.println("s2의 hashCode: " + System.identityHashCode(s2));
+        System.out.println("s3의 hashCode: " + System.identityHashCode(s3));
+        System.out.println("s4의 hashCode: " + System.identityHashCode(s4));
         System.out.println(s1 == s2);
         System.out.println(s1.equals(s2));
         System.out.println(s3 == s4);
@@ -93,10 +85,10 @@ public class Test {
         System.out.println();
         
         s3 = s3.intern();  // Heap Memory쪽으로 참조하던걸 String Pool쪽으로!
-        System.out.println("s1의 주솟값: " + System.identityHashCode(s1));
-        System.out.println("s2의 주솟값: " + System.identityHashCode(s2));
-        System.out.println("s3의 주솟값: " + System.identityHashCode(s3));
-        System.out.println("s4의 주솟값: " + System.identityHashCode(s4));
+        System.out.println("s1의 hashCode: " + System.identityHashCode(s1));
+        System.out.println("s2의 hashCode: " + System.identityHashCode(s2));
+        System.out.println("s3의 hashCode: " + System.identityHashCode(s3));
+        System.out.println("s4의 hashCode: " + System.identityHashCode(s4));
         System.out.println(s1 == s2);
         System.out.println(s1.equals(s2));
         System.out.println(s3 == s4);
@@ -107,25 +99,26 @@ public class Test {
 ------------------------------------------------------------------
 Output:
 
-s1의 주솟값: 705927765 (임의값)
-s2의 주솟값: 705927765 (임의값)
-s3의 주솟값: 366712642 (임의값)
-s4의 주솟값: 1829164700 (임의값)
+s1의 hashCode: 705927765
+s2의 hashCode: 705927765
+s3의 hashCode: 366712642
+s4의 hashCode: 1829164700
 true
 true
 false
 true
 ###########################
 
-s1의 주솟값: 705927765 (임의값)
-s2의 주솟값: 705927765 (임의값)
-s3의 주솟값: 1829164700 (임의값)
-s4의 주솟값: 1829164700 (임의값)
+s1의 hashCode: 705927765
+s2의 hashCode: 705927765
+s3의 hashCode: 1829164700
+s4의 hashCode: 1829164700
 true
 true
 true
 true
 ```
+hashCode를 주솟값이라 한다면,  
 ***s1*** => ```String Pool```에 ```705927765```라는 주솟값을 가지고 생성됐다.  
 
 ***s2*** => ```String Pool```에 이미 같은 데이터가 있으므로 그 데이터의 주솟값을 참조한다.  
@@ -138,7 +131,6 @@ true
 ---
 
 ## 결론
-reference type인 문자열은 ```주솟값```을 참조하는데...  
 ```String Pool```로 인해 ```주솟값```과 ```데이터 값```이 다를 수 있으므로 문자열의 데이터 값을 비교하고자 한다면 ```데이터 값```을 비교하는 메서드 ```equals()```를 쓰는게 안전하며.  
 문자열 생성시에는 ```Double Quotes``` 방법을 지향하자...
 
